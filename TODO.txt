@@ -1,0 +1,13 @@
+gegevens opslaan in sessie als er fouten gebeuren in toevoegen van gegevens
+zeggen wat er fout loopt in toevoegen
+lengtes wachtwoorden, formaten
+database mag nie null zijn
+hub?
+css
+
+A21
+A22
+A23
+A24
+A31
+A32

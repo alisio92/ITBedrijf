@@ -1,0 +1,21 @@
+﻿@model PMOrganisation
+<h2>Organistatie Overzicht</h2>
+<table>
+    <tr>
+        <td width="200px">@Html.LabelFor(a => a.OrganisationName)</td>
+        <td width="200px">@Html.LabelFor(a => a.Address)</td>
+        <td width="200px">@Html.LabelFor(a => a.Email)</td>
+        <td width="200px">@Html.LabelFor(a => a.Phone)</td>
+    </tr>
+    @foreach (var item in @ViewBag.Organisation)
+    {
+        <tr>
+            <td>@item.OrganisationName</td>
+            <td>@item.Address</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
+</tr>
+    }
+</table>
+<p><a href="/Vereniging/NewOrganisation">Nieuwe vereniging</a></p>

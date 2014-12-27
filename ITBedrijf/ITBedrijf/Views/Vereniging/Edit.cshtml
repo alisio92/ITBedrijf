@@ -1,0 +1,60 @@
+﻿@model PMOrganisation
+<h2>Bewerk</h2>
+@using (Html.BeginForm("Edit", "Vereniging", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.Id);
+    <table>
+        <tr>
+            <td>Persoonlijke Gegevens</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Login)</td>
+            <td>@Html.TextBoxFor(a => a.Login)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Password)</td>
+            <td>@Html.PasswordFor(a => a.Password)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.ControlePassword)</td>
+            <td>@Html.PasswordFor(a => a.ControlePassword)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Address)</td>
+            <td>@Html.TextBoxFor(a => a.Address)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Email)</td>
+            <td>@Html.TextBoxFor(a => a.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Phone)</td>
+            <td>@Html.TextBoxFor(a => a.Phone)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.OrganisationName)</td>
+            <td>@Html.TextBoxFor(a => a.OrganisationName)</td>
+        </tr>
+        <tr>
+            <td>Database Gegevens</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.DbLogin)</td>
+            <td>@Html.TextBoxFor(a => a.DbLogin)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.DbName)</td>
+            <td>@Html.TextBoxFor(a => a.DbName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.DbPassword)</td>
+            <td>@Html.PasswordFor(a => a.DbPassword)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.DbControlePassword)</td>
+            <td>@Html.PasswordFor(a => a.DbControlePassword)</td>
+        </tr>
+    </table>
+    <input type="submit" name="Update" value="Update" />
+}
+
