@@ -77,5 +77,38 @@ namespace ITBedrijf.Controllers
             }
             return RedirectToAction("Edit", new { id = id });
         }
+
+        [HttpGet]
+        public ActionResult Register(int id)
+        {
+            PMOrganisationRegister organisationRegister = DAOrganisationRegister.GetRegisterById(id);
+            ViewBag.Register = organisationRegister;
+            organisationRegister.OrganisationID = id;
+            ViewBag.Login = DAOrganisation.GetOrganisationById(id);
+            return View(organisationRegister);
+        }
+        [HttpGet]
+        public ActionResult NewRegister(int id)
+        {
+            PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
+            organisationRegister.NewRegister = new SelectList(DARegister.GetRegisters(), "Id", "RegisterName");
+            organisationRegister.OrganisationID = id;
+            ViewBag.Login = DAOrganisation.GetOrganisationById(id);
+            return View(organisationRegister);
+        }
+
+        [HttpPost]
+        public ActionResult NewRegister(int id, int organisationID, int registerID, DateTime FromDate, DateTime FromTime, DateTime UntilDate, DateTime UntilTime)
+        {
+            if (FromDate >= UntilDate) return RedirectToAction("Register", new { id = id });
+            PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
+            organisationRegister.OrganisationID = organisationID;
+            organisationRegister.RegisterID = registerID;
+            organisationRegister.FromDate = new DateTime(FromDate.Year, FromDate.Month, FromDate.Day, FromTime.Hour, FromTime.Minute, 0);
+            organisationRegister.UntilDate = new DateTime(UntilDate.Year, UntilDate.Month, UntilDate.Day, UntilTime.Hour, UntilTime.Minute, 0);
+
+            //DARegister.InsertRegister(organisationRegister);
+            return RedirectToAction("Register", new { id = id });
+        }
     }
 }

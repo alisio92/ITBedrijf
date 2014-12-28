@@ -19,12 +19,12 @@ namespace ITBedrijf.DataAccess
             string sql = create.Replace("@@DbName", o.DbName).Replace("@@DbLogin", o.DbLogin).Replace("@@DbPassword", o.DbPassword);
             foreach (string commandText in RemoveGo(sql))
             {
-                Database.ModifyData(Database.GetConnection("AdminDB"), commandText);
+                Database.ModifyData(Database.GetConnection("ClientDB"), commandText);
             }
             DbTransaction trans = null;
             try
             {
-                trans = Database.BeginTransaction("AdminDB");
+                trans = Database.BeginTransaction("ClientDB");
                 string fill = File.ReadAllText(path + "\\Data\\fill.txt");
                 string sql2 = fill.Replace("@@DbName", o.DbName).Replace("@@DbLogin", o.DbLogin).Replace("@@DbPassword", o.DbPassword);
 

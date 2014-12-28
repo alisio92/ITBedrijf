@@ -12,7 +12,7 @@ namespace ITBedrijf.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Naam Kassa ")]
+        [DisplayName("Naam Kassa")]
         public string RegisterName { get; set; }
 
         [Required]

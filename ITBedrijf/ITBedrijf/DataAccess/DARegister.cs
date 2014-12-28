@@ -1,4 +1,5 @@
 ﻿using ITBedrijf.Models;
+using ITBedrijf.PresentationModels;
 using ITBedrijfProject.DataAcces;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,20 @@ namespace ITBedrijf.DataAccess
                 register.RegisterName = reader["RegisterName"].ToString();
                 register.Device = reader["Device"].ToString();
                 register.PurchaseDate = (DateTime)reader["PurchaseDate"];
-                register.ExpiresDate = (DateTime)reader["ExpiresDate"];
+                register.ExpiresDate = (DateTime)reader["ExpireDate"];
                 Registers.Add(register);
             }
             return Registers;
+        }
+
+        public static int InsertRegister(Register register)
+        {
+            string sql = "INSERT INTO Registers VALUES(@RegisterName,@Device,@PurchaseDate,@ExpiresDate)";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@RegisterName", register.RegisterName);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@Device", register.Device);
+            DbParameter par3 = Database.AddParameter("AdminDB", "@PurchaseDate", register.PurchaseDate);
+            DbParameter par4 = Database.AddParameter("AdminDB", "@ExpireDate", register.ExpiresDate);
+            return Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ITBedrijf.DataAccess
     {
         public static List<Organisation> GetOrganisations()
         {
-            string sql = "SELECT * FROM Organisation";
+            string sql = "SELECT * FROM Organisations";
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
             List<Organisation> Organisations = new List<Organisation>();
             while (reader.Read())
@@ -38,7 +38,7 @@ namespace ITBedrijf.DataAccess
 
         public static int InsertOrganisation(Organisation organisation)
         {
-            string sql = "INSERT INTO Organisation VALUES(@Login,@Password,@DbName,@DbLogin,@DbPassword,@OrganisationName,@Address,@Email,@Phone)";
+            string sql = "INSERT INTO Organisations VALUES(@Login,@Password,@DbName,@DbLogin,@DbPassword,@OrganisationName,@Address,@Email,@Phone)";
             DbParameter par1 = Database.AddParameter("AdminDB", "@Login", organisation.Login);
             DbParameter par2 = Database.AddParameter("AdminDB", "@Password", organisation.Password);
             DbParameter par3 = Database.AddParameter("AdminDB", "@DbName", organisation.DbName);
@@ -56,7 +56,7 @@ namespace ITBedrijf.DataAccess
 
         public static PMOrganisation GetOrganisationById(int id)
         {
-            string sql = "SELECT * FROM Organisation WHERE ID=@ID";
+            string sql = "SELECT * FROM Organisations WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
             PMOrganisation organisation = new PMOrganisation();
@@ -78,7 +78,7 @@ namespace ITBedrijf.DataAccess
 
         public static int UpdateOrganisation(int id, string Login, string Password, string DbName, string DbLogin, string DbPassword, string OrganisationName, string Address, string Email, string Phone)
         {
-            string sql = "UPDATE Organisation SET OrganisationName=@OrganisationName, Login=@Login, Password=@Password, DbName=@DbName, DbLogin=@DbLogin, DbPassword=@DbPassword, Address=@Address, Email=@Email, Phone=@Phone WHERE ID=@ID";
+            string sql = "UPDATE Organisations SET OrganisationName=@OrganisationName, Login=@Login, Password=@Password, DbName=@DbName, DbLogin=@DbLogin, DbPassword=@DbPassword, Address=@Address, Email=@Email, Phone=@Phone WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbParameter par2 = Database.AddParameter("AdminDB", "@OrganisationName", OrganisationName);
             DbParameter par3 = Database.AddParameter("AdminDB", "@Login", Login);
