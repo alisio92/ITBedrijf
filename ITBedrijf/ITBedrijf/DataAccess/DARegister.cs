@@ -13,7 +13,7 @@ namespace ITBedrijf.DataAccess
     {
         public static List<Register> GetRegisters()
         {
-            string sql = "SELECT * FROM Registers";
+            string sql = "SELECT ID, RegisterName, Device, PurchaseDate, ExpireDate FROM Registers";
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
             List<Register> Registers = new List<Register>();
             while (reader.Read())

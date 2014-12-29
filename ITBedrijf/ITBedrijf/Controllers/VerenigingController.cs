@@ -81,7 +81,7 @@ namespace ITBedrijf.Controllers
         [HttpGet]
         public ActionResult Register(int id)
         {
-            ViewBag.Register = DAOrganisationRegister.GetRegisterById(id);
+            ViewBag.Register = DAOrganisationRegister.GetOrganisationRegisterById(id);
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
             return View();
         }
@@ -108,6 +108,38 @@ namespace ITBedrijf.Controllers
 
             DAOrganisationRegister.InsertOrganisationRegister(organisationRegister);
             return RedirectToAction("Register", new { id = organisationID });
+        }
+
+        [HttpGet]
+        public ActionResult EditRegister(int organisationID, int registerID)
+        {
+            PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
+            organisationRegister.NewOrganisation = new MultiSelectList(DAOrganisation.GetOrganisations(), "Id", "Login", "OrganisationName");
+            OrganisationRegister or = DAOrganisationRegister.GetOrganisationRegisterByIds(organisationID, registerID);
+            organisationRegister.Device = or.Device;
+            organisationRegister.FromDate = or.FromDate;
+            organisationRegister.Login = or.Login;
+            organisationRegister.OrganisationID = or.OrganisationID;
+            organisationRegister.OrganisationName = or.OrganisationName;
+            organisationRegister.RegisterID = or.RegisterID;
+            organisationRegister.RegisterName = or.RegisterName;
+            organisationRegister.UntilDate = or.UntilDate;
+
+            ViewBag.Organisation = DAOrganisation.GetOrganisationById(organisationID);
+            ViewBag.oldId = organisationID;
+            return View(organisationRegister);
+        }
+
+        [HttpPost]
+        public ActionResult EditRegister(int oldOrganisationID, int organisationID, DateTime fromDate, DateTime untilDate, int registerID)
+        {
+            OrganisationRegister organisationRegister = DAOrganisationRegister.GetOrganisationRegisterByIds(organisationID, registerID);
+            organisationRegister.FromDate = fromDate;
+            organisationRegister.OrganisationID = organisationID;
+            organisationRegister.RegisterID = registerID;
+            organisationRegister.UntilDate = untilDate;
+            DAOrganisationRegister.UpdateOrganisationRegister(oldOrganisationID, organisationRegister);
+            return RedirectToAction("Register", new { id = oldOrganisationID });
         }
     }
 }

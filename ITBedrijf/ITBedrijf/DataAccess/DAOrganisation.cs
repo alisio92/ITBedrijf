@@ -14,7 +14,7 @@ namespace ITBedrijf.DataAccess
     {
         public static List<Organisation> GetOrganisations()
         {
-            string sql = "SELECT * FROM Organisations";
+            string sql = "SELECT ID, Login, Password, DbName, DbLogin, DbPassword, OrganisationName, Address, Email, Phone FROM Organisations";
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
             List<Organisation> Organisations = new List<Organisation>();
             while (reader.Read())
@@ -56,7 +56,7 @@ namespace ITBedrijf.DataAccess
 
         public static PMOrganisation GetOrganisationById(int id)
         {
-            string sql = "SELECT * FROM Organisations WHERE ID=@ID";
+            string sql = "SELECT ID, Login, Password, DbName, DbLogin, DbPassword, OrganisationName, Address, Email, Phone FROM Organisations WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
             PMOrganisation organisation = new PMOrganisation();

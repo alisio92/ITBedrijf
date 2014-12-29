@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PostSharp">
+      <HintPath>..\packages\PostSharp.4.1.6-alpha\lib\net35-client\PostSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -182,6 +185,7 @@
     <Compile Include="Models\OrganisationRegister.cs" />
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Models\Register.cs" />
+    <Compile Include="OnMethodBoundaryAttribute1.cs" />
     <Compile Include="PresentationModels\PMOrganisation.cs" />
     <Compile Include="PresentationModels\PMOrganisationRegister.cs" />
     <Compile Include="PresentationModels\PMRegister.cs" />
@@ -256,6 +260,8 @@
     <Content Include="Views\Kassa\NewRegister.cshtml" />
     <Content Include="Views\Vereniging\Register.cshtml" />
     <Content Include="Views\Vereniging\NewRegister.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Vereniging\EditRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

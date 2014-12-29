@@ -112,3 +112,5 @@ C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedri
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.csproj.GenerateResource.Cache
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.dll
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.pdb
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.dll
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.xml

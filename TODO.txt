@@ -5,9 +5,9 @@ database mag nie null zijn
 hub?
 css
 beveiliging
+app enkel bruikbaar voor ingelogde user
+cancel
+meer aanpassingen A23
 
-A22
-A23
-A24
 A31
 A32
