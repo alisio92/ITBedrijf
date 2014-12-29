@@ -25,6 +25,6 @@ namespace ITBedrijf.Models
 
         [Required]
         [DisplayName("Verval Datum")]
-        public DateTime ExpiresDate { get; set; }
+        public DateTime ExpireDate { get; set; }
     }
 }

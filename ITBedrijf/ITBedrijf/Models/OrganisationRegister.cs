@@ -10,12 +10,26 @@ namespace ITBedrijf.Models
     public class OrganisationRegister
     {
         [Required]
-        [DisplayName("Vereniging")]
         public int OrganisationID { get; set; }
 
         [Required]
-        [DisplayName("Kassa")]
+        [DisplayName("Naam Vereniging")]
+        public string OrganisationName { get; set; }
+
+        [Required]
+        [DisplayName("Login")]
+        public string Login { get; set; }
+
+        [Required]
         public int RegisterID { get; set; }
+
+        [Required]
+        [DisplayName("Naam Kassa")]
+        public string RegisterName { get; set; }
+
+        [Required]
+        [DisplayName("Naam Toestel")]
+        public string Device { get; set; }
 
         [Required]
         [DisplayName("Van")]

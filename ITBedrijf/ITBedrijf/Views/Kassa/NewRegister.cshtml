@@ -18,10 +18,10 @@
             <td><input type="time" value="@DateTime.Today" id="PurchaseTime" name="PurchaseTime" /></td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(a => a.ExpiresDate)</td>
-            <td><input type="date" value="@DateTime.Today" id="ExpiresDate" name="ExpiresDate" min="@DateTime.Today.AddDays(1).Year-@DateTime.Today.AddDays(1).Month-@DateTime.Today.AddDays(1).Day" /></td>
-            <td><input type="time" value="@DateTime.Today" id="ExpiresTime" name="ExpiresTime" /></td>
+            <td>@Html.LabelFor(a => a.ExpireDate)</td>
+            <td><input type="date" value="@DateTime.Today" id="ExpireDate" name="ExpireDate" min="@DateTime.Today.AddDays(1).Year-@DateTime.Today.AddDays(1).Month-@DateTime.Today.AddDays(1).Day" /></td>
+            <td><input type="time" value="@DateTime.Today" id="ExpireTime" name="ExpireTime" /></td>
         </tr>
     </table>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Kassa Toevoegen" />
 }

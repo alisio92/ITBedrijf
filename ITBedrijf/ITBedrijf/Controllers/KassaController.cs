@@ -23,17 +23,17 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewRegister(string registerName, string device, DateTime purchaseDate, DateTime purchaseTime, DateTime expiresDate, DateTime expiresTime)
+        public ActionResult NewRegister(string registerName, string device, DateTime purchaseDate, DateTime purchaseTime, DateTime expireDate, DateTime expireTime)
         {
-            if (purchaseDate >= expiresDate) return RedirectToAction("NewRegister");
+            if (purchaseDate >= expireDate) return RedirectToAction("Index");
             Register register = new Register();
             register.RegisterName = registerName;
             register.Device = device;
             register.PurchaseDate = new DateTime(purchaseDate.Year, purchaseDate.Month, purchaseDate.Day, purchaseTime.Hour, purchaseTime.Minute, 0);
-            register.ExpiresDate = new DateTime(expiresDate.Year, expiresDate.Month, expiresDate.Day, expiresTime.Hour, expiresTime.Minute, 0);
+            register.ExpireDate = new DateTime(expireDate.Year, expireDate.Month, expireDate.Day, expireTime.Hour, expireTime.Minute, 0);
 
             DARegister.InsertRegister(register);
-            return RedirectToAction("NewRegister");
+            return RedirectToAction("Index");
         }
     }
 }

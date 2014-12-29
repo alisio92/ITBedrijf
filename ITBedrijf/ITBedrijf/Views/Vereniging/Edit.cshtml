@@ -1,5 +1,5 @@
 ﻿@model PMOrganisation
-<h2>Bewerk</h2>
+<h2>Vereniging Aanpassen</h2>
 @using (Html.BeginForm("Edit", "Vereniging", FormMethod.Post))
 {
     @Html.HiddenFor(a => a.Id);
@@ -55,6 +55,6 @@
             <td>@Html.PasswordFor(a => a.DbControlePassword)</td>
         </tr>
     </table>
-    <input type="submit" name="Update" value="Update" />
+    <input type="submit" name="Update" value="Aanpassen" />
 }
 

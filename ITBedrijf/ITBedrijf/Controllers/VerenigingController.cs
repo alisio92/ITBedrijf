@@ -81,34 +81,33 @@ namespace ITBedrijf.Controllers
         [HttpGet]
         public ActionResult Register(int id)
         {
-            PMOrganisationRegister organisationRegister = DAOrganisationRegister.GetRegisterById(id);
-            ViewBag.Register = organisationRegister;
-            organisationRegister.OrganisationID = id;
-            ViewBag.Login = DAOrganisation.GetOrganisationById(id);
-            return View(organisationRegister);
+            ViewBag.Register = DAOrganisationRegister.GetRegisterById(id);
+            ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
+            return View();
         }
+
         [HttpGet]
         public ActionResult NewRegister(int id)
         {
             PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
-            organisationRegister.NewRegister = new SelectList(DARegister.GetRegisters(), "Id", "RegisterName");
+            organisationRegister.NewRegister = new MultiSelectList(DARegister.GetRegisters(), "Id", "RegisterName", "Device");
             organisationRegister.OrganisationID = id;
-            ViewBag.Login = DAOrganisation.GetOrganisationById(id);
+            ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
             return View(organisationRegister);
         }
 
         [HttpPost]
-        public ActionResult NewRegister(int id, int organisationID, int registerID, DateTime FromDate, DateTime FromTime, DateTime UntilDate, DateTime UntilTime)
+        public ActionResult NewRegister(int organisationID, int registerID, DateTime FromDate, DateTime FromTime, DateTime UntilDate, DateTime UntilTime)
         {
-            if (FromDate >= UntilDate) return RedirectToAction("Register", new { id = id });
-            PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
+            if (FromDate >= UntilDate) return RedirectToAction("Register", new { id = organisationID });
+            OrganisationRegister organisationRegister = new OrganisationRegister();
             organisationRegister.OrganisationID = organisationID;
             organisationRegister.RegisterID = registerID;
             organisationRegister.FromDate = new DateTime(FromDate.Year, FromDate.Month, FromDate.Day, FromTime.Hour, FromTime.Minute, 0);
             organisationRegister.UntilDate = new DateTime(UntilDate.Year, UntilDate.Month, UntilDate.Day, UntilTime.Hour, UntilTime.Minute, 0);
 
-            //DARegister.InsertRegister(organisationRegister);
-            return RedirectToAction("Register", new { id = id });
+            DAOrganisationRegister.InsertOrganisationRegister(organisationRegister);
+            return RedirectToAction("Register", new { id = organisationID });
         }
     }
 }

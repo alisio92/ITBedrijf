@@ -10,6 +10,6 @@ namespace ITBedrijf.PresentationModels
     public class PMOrganisationRegister : OrganisationRegister
     {
         public SelectList NewOrganisation { get; set; }
-        public SelectList NewRegister { get; set; }
+        public MultiSelectList NewRegister { get; set; }
     }
 }

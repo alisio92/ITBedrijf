@@ -23,7 +23,7 @@ namespace ITBedrijf.DataAccess
                 register.RegisterName = reader["RegisterName"].ToString();
                 register.Device = reader["Device"].ToString();
                 register.PurchaseDate = (DateTime)reader["PurchaseDate"];
-                register.ExpiresDate = (DateTime)reader["ExpireDate"];
+                register.ExpireDate = (DateTime)reader["ExpireDate"];
                 Registers.Add(register);
             }
             return Registers;
@@ -31,11 +31,11 @@ namespace ITBedrijf.DataAccess
 
         public static int InsertRegister(Register register)
         {
-            string sql = "INSERT INTO Registers VALUES(@RegisterName,@Device,@PurchaseDate,@ExpiresDate)";
+            string sql = "INSERT INTO Registers VALUES(@RegisterName,@Device,@PurchaseDate,@ExpireDate)";
             DbParameter par1 = Database.AddParameter("AdminDB", "@RegisterName", register.RegisterName);
             DbParameter par2 = Database.AddParameter("AdminDB", "@Device", register.Device);
             DbParameter par3 = Database.AddParameter("AdminDB", "@PurchaseDate", register.PurchaseDate);
-            DbParameter par4 = Database.AddParameter("AdminDB", "@ExpireDate", register.ExpiresDate);
+            DbParameter par4 = Database.AddParameter("AdminDB", "@ExpireDate", register.ExpireDate);
             return Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4);
         }
     }

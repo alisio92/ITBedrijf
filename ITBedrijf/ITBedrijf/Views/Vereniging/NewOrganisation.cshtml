@@ -1,5 +1,5 @@
 ﻿@model PMOrganisation
-<h2>Organisatie Toevoegen</h2>
+<h2>Vereniging Toevoegen</h2>
 @using (Html.BeginForm("NewOrganisation", "Vereniging", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <table>
@@ -54,6 +54,6 @@
             <td>@Html.PasswordFor(a => a.DbControlePassword, new { placeholder = Html.DisplayNameFor(a => a.DbControlePassword) })</td>
         </tr>
     </table>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Vereniging Toevoegen" />
 }
 

@@ -1,5 +1,5 @@
 ﻿@model PMOrganisationRegister
-<h2>Kassa Toevoegen aan @ViewBag.Login.Login</h2>
+<h2>Kassa Toevoegen aan @ViewBag.Organisation.OrganisationName:@ViewBag.Organisation.Login</h2>
 @using (Html.BeginForm("NewRegister", "Vereniging", FormMethod.Post))
 {
 @Html.HiddenFor(a => a.OrganisationID)
@@ -20,5 +20,5 @@
             <td><input type="time" value="@DateTime.Today" id="UntilTime" name="UntilTime" /></td>
         </tr>
     </table>
-    <input type="submit" name="Register" value="Toevoegen" />
+    <input type="submit" value="Toevoegen" />
 }

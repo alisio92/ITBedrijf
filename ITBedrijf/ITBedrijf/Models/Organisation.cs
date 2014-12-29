@@ -32,7 +32,7 @@ namespace ITBedrijf.Models
         public string DbPassword { get; set; }
 
         [Required]
-        [DisplayName("Naam Organisatie")]
+        [DisplayName("Naam Vereniging")]
         public string OrganisationName { get; set; }
 
         [Required]

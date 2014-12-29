@@ -1,22 +1,22 @@
 ﻿@model PMOrganisationRegister
-<h2>Kassa's voor @ViewBag.Login.Login</h2>
+<h2>Kassa's voor @ViewBag.Organisation.OrganisationName:@ViewBag.Organisation.Login</h2>
 <table>
     <tr>
-        <td width="200px">@Html.LabelFor(a => a.OrganisationID)</td>
-        <td width="200px">@Html.LabelFor(a => a.RegisterID)</td>
+        <td width="400px">@Html.LabelFor(a => a.OrganisationName):@Html.LabelFor(a => a.Login)</td>
+        <td width="400px">@Html.LabelFor(a => a.RegisterName):@Html.LabelFor(a => a.Device)</td>
         <td width="200px">@Html.LabelFor(a => a.FromDate)</td>
         <td width="200px">@Html.LabelFor(a => a.UntilDate)</td>
     </tr>
-    @*@foreach (var item in @ViewBag.Register)
+    @foreach (var item in @ViewBag.Register)
     {
         <tr>
-            <td>@item.OrganisationID</td>
-            <td>@item.RegisterID</td>
+            <td>@item.OrganisationName:@item.Login</td>
+            <td>@item.RegisterName:@item.Device</td>
             <td>@item.FromDate</td>
             <td>@item.UntilDate</td>
         </tr>
-    }*@
+    }
 </table>
-<p><a href="/Vereniging/NewRegister?id=@Html.DisplayFor(a => a.OrganisationID)">Kassa Toevoegen</a></p>
+<p><a href="/Vereniging/NewRegister?id=@ViewBag.Organisation.Id">Kassa Toevoegen</a></p>
 
 
