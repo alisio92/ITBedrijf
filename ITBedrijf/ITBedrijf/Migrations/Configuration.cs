@@ -35,12 +35,16 @@ namespace ITBedrijf.Migrations
                 var manager = new UserManager<ApplicationUser>(store);
                 var user = new ApplicationUser()
                 {
-                    Login = "Alisio",
-                    Password = "123456",                
+                    FirstName = "Alisio",
+                    Name = "Putman",          
                     Email = "alisio.putman@student.howest.be",
-                    UserName = "alisio.putman@student.howest.be"
+                    UserName  = "alisio.putman@student.howest.be",
+                    Address = "Minister de Tayelaan",
+                    City = "Wielsbeke",
+                    Zipcode = "8710",
+                    TwitterName = "@nmct"
                 };
-                manager.Create(user, "-Password1");
+                manager.Create(user, "123456");
                 manager.AddToRole(user.Id, roleAdmin);
             }
         }

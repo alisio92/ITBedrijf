@@ -17,15 +17,13 @@ namespace ITBedrijf.Models
             return userIdentity;
         }
 
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string DbName { get; set; }
-        public string DbLogin { get; set; }
-        public string DbPassword { get; set; }
-        public string OrganisationName { get; set; }
+        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string Address { get; set; }
-        //public string Email { get; set; }
-        public string Phone { get; set; }
+        public string City { get; set; }
+        public string Zipcode { get; set; }
+        public string TwitterName { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

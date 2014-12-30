@@ -22,19 +22,23 @@ namespace ITBedrijf.DataAccess
             sql += " WHERE OrganisationID=@OrganisationID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@OrganisationID", id);
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
-            List<OrganisationRegister> organisationRegisters = new List<OrganisationRegister>();
-            while (reader.Read())
+            List<OrganisationRegister> organisationRegisters = null;
+            if (reader != null)
             {
-                OrganisationRegister organisationRegister = new OrganisationRegister();
-                organisationRegister.OrganisationID = (int)reader["OrganisationID"];
-                organisationRegister.RegisterID = (int)reader["RegisterID"];
-                organisationRegister.FromDate = (DateTime)reader["FromDate"];
-                organisationRegister.UntilDate = (DateTime)reader["UntilDate"];
-                organisationRegister.RegisterName = reader["RegisterName"].ToString();
-                organisationRegister.OrganisationName = reader["OrganisationName"].ToString();
-                organisationRegister.Login = reader["Login"].ToString();
-                organisationRegister.Device = reader["Device"].ToString();
-                organisationRegisters.Add(organisationRegister);
+                organisationRegisters = new List<OrganisationRegister>();
+                while (reader.Read())
+                {
+                    OrganisationRegister organisationRegister = new OrganisationRegister();
+                    organisationRegister.OrganisationID = (int)reader["OrganisationID"];
+                    organisationRegister.RegisterID = (int)reader["RegisterID"];
+                    organisationRegister.FromDate = (DateTime)reader["FromDate"];
+                    organisationRegister.UntilDate = (DateTime)reader["UntilDate"];
+                    organisationRegister.RegisterName = reader["RegisterName"].ToString();
+                    organisationRegister.OrganisationName = reader["OrganisationName"].ToString();
+                    organisationRegister.Login = reader["Login"].ToString();
+                    organisationRegister.Device = reader["Device"].ToString();
+                    organisationRegisters.Add(organisationRegister);
+                }
             }
             return organisationRegisters;
         }
@@ -51,17 +55,21 @@ namespace ITBedrijf.DataAccess
             DbParameter par1 = Database.AddParameter("AdminDB", "@OrganisationID", OrganisationID);
             DbParameter par2 = Database.AddParameter("AdminDB", "@RegisterID", RegisterID);
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1, par2);
-            OrganisationRegister organisationRegister = new OrganisationRegister();
-            while (reader.Read())
+            OrganisationRegister organisationRegister = null;
+            if (reader != null)
             {
-                organisationRegister.OrganisationID = (int)reader["OrganisationID"];
-                organisationRegister.RegisterID = (int)reader["RegisterID"];
-                organisationRegister.FromDate = (DateTime)reader["FromDate"];
-                organisationRegister.UntilDate = (DateTime)reader["UntilDate"];
-                organisationRegister.RegisterName = reader["RegisterName"].ToString();
-                organisationRegister.OrganisationName = reader["OrganisationName"].ToString();
-                organisationRegister.Login = reader["Login"].ToString();
-                organisationRegister.Device = reader["Device"].ToString();
+                organisationRegister = new OrganisationRegister();
+                while (reader.Read())
+                {
+                    organisationRegister.OrganisationID = (int)reader["OrganisationID"];
+                    organisationRegister.RegisterID = (int)reader["RegisterID"];
+                    organisationRegister.FromDate = (DateTime)reader["FromDate"];
+                    organisationRegister.UntilDate = (DateTime)reader["UntilDate"];
+                    organisationRegister.RegisterName = reader["RegisterName"].ToString();
+                    organisationRegister.OrganisationName = reader["OrganisationName"].ToString();
+                    organisationRegister.Login = reader["Login"].ToString();
+                    organisationRegister.Device = reader["Device"].ToString();
+                }
             }
             return organisationRegister;
         }

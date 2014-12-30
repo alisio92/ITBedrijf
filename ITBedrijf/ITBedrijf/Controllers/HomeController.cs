@@ -28,6 +28,16 @@ namespace ITBedrijf.Controllers
         }
 
         public ActionResult Error()
+        { 
+            return View();
+        }
+
+        public ActionResult ErrorServer()
+        {
+            return View();
+        }
+
+        public ActionResult ErrorLogin()
         {
             return View();
         }

@@ -72,29 +72,31 @@ namespace ITBedrijf.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Paswoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Becestig Paswoord")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         [Required]
-        public string Login { get; set; }
+        [Display(Name = "Voornaam")]
+        public string FirstName { get; set; }
         [Required]
-        public string DbName { get; set; }
+        [Display(Name = "Naam")]
+        public string Name { get; set; }
         [Required]
-        public string DbLogin { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        public string DbPassword { get; set; }
-        [Required]
-        public string OrganisationName { get; set; }
-        [Required]
+        [Display(Name = "Adres")]
         public string Address { get; set; }
-        //public string Email { get; set; }
         [Required]
-        public string Phone { get; set; }
+        [Display(Name = "Stad")]
+        public string City { get; set; }
+        [Required]
+        [Display(Name = "Postcode")]
+        public string Zipcode { get; set; }
+        [Required]
+        [Display(Name = "Twitter")]
+        public string TwitterName { get; set; }
     }
 
     public class ResetPasswordViewModel

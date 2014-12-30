@@ -153,16 +153,14 @@ namespace ITBedrijf.Controllers
             {
                 var user = new ApplicationUser
                 {
+                    Name = model.Name,
+                    FirstName = model.FirstName,
                     Address = model.Address,
-                    Email = model.Email,
-                    Login = model.Login,
-                    Password = model.Password,
-                    DbName = model.DbName,
-                    DbLogin = model.DbLogin,
-                    DbPassword = model.DbPassword,
-                    OrganisationName = model.OrganisationName,
-                    Phone = model.Phone,
-                    UserName = model.Email
+                    City = model.City,
+                    Zipcode = model.Zipcode,
+                    TwitterName = model.TwitterName,
+                    UserName = model.Email,
+                    Email = model.Email
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 Console.WriteLine(user.Email + " " + model.Email);

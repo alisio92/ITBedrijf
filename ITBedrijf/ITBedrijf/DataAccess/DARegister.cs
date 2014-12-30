@@ -15,17 +15,22 @@ namespace ITBedrijf.DataAccess
         {
             string sql = "SELECT ID, RegisterName, Device, PurchaseDate, ExpireDate FROM Registers";
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
-            List<Register> Registers = new List<Register>();
-            while (reader.Read())
+            List<Register> Registers = null;
+            if (reader != null)
             {
-                Register register = new Register();
-                register.Id = (int)reader["ID"];
-                register.RegisterName = reader["RegisterName"].ToString();
-                register.Device = reader["Device"].ToString();
-                register.PurchaseDate = (DateTime)reader["PurchaseDate"];
-                register.ExpireDate = (DateTime)reader["ExpireDate"];
-                Registers.Add(register);
+                Registers = new List<Register>();
+                while (reader.Read())
+                {
+                    Register register = new Register();
+                    register.Id = (int)reader["ID"];
+                    register.RegisterName = reader["RegisterName"].ToString();
+                    register.Device = reader["Device"].ToString();
+                    register.PurchaseDate = (DateTime)reader["PurchaseDate"];
+                    register.ExpireDate = (DateTime)reader["ExpireDate"];
+                    Registers.Add(register);
+                }
             }
+            
             return Registers;
         }
 

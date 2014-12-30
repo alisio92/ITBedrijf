@@ -16,22 +16,26 @@ namespace ITBedrijf.DataAccess
         {
             string sql = "SELECT ID, Login, Password, DbName, DbLogin, DbPassword, OrganisationName, Address, Email, Phone FROM Organisations";
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
-            List<Organisation> Organisations = new List<Organisation>();
-            while (reader.Read())
+            List<Organisation> Organisations = null;
+            if (reader != null)
             {
-                Organisation organisation = new Organisation();
-                organisation.Id = (int)reader["ID"];
-                organisation.Login = reader["Login"].ToString();
-                organisation.Password = reader["Password"].ToString();
-                organisation.DbName = reader["DbName"].ToString();
-                organisation.DbLogin = reader["DbLogin"].ToString();
-                organisation.DbPassword = reader["DbPassword"].ToString();
-                organisation.OrganisationName = reader["OrganisationName"].ToString();
-                organisation.Address = reader["Address"].ToString();
-                organisation.Email = reader["Email"].ToString();
-                organisation.Phone = reader["Phone"].ToString();
+                Organisations = new List<Organisation>();
+                while (reader.Read())
+                {
+                    Organisation organisation = new Organisation();
+                    organisation.Id = (int)reader["ID"];
+                    organisation.Login = reader["Login"].ToString();
+                    organisation.Password = reader["Password"].ToString();
+                    organisation.DbName = reader["DbName"].ToString();
+                    organisation.DbLogin = reader["DbLogin"].ToString();
+                    organisation.DbPassword = reader["DbPassword"].ToString();
+                    organisation.OrganisationName = reader["OrganisationName"].ToString();
+                    organisation.Address = reader["Address"].ToString();
+                    organisation.Email = reader["Email"].ToString();
+                    organisation.Phone = reader["Phone"].ToString();
 
-                Organisations.Add(organisation);
+                    Organisations.Add(organisation);
+                }
             }
             return Organisations;
         }
@@ -59,19 +63,23 @@ namespace ITBedrijf.DataAccess
             string sql = "SELECT ID, Login, Password, DbName, DbLogin, DbPassword, OrganisationName, Address, Email, Phone FROM Organisations WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
-            PMOrganisation organisation = new PMOrganisation();
-            while (reader.Read())
+            PMOrganisation organisation = null;
+            if (reader != null)
             {
-                organisation.Id = (int)reader["ID"];
-                organisation.Login = reader["Login"].ToString();
-                organisation.Password = reader["Password"].ToString();
-                organisation.DbName = reader["DbName"].ToString();
-                organisation.DbLogin = reader["DbLogin"].ToString();
-                organisation.DbPassword = reader["DbPassword"].ToString();
-                organisation.OrganisationName = reader["OrganisationName"].ToString();
-                organisation.Address = reader["Address"].ToString();
-                organisation.Email = reader["Email"].ToString();
-                organisation.Phone = reader["Phone"].ToString();
+                organisation = new PMOrganisation();
+                while (reader.Read())
+                {
+                    organisation.Id = (int)reader["ID"];
+                    organisation.Login = reader["Login"].ToString();
+                    organisation.Password = reader["Password"].ToString();
+                    organisation.DbName = reader["DbName"].ToString();
+                    organisation.DbLogin = reader["DbLogin"].ToString();
+                    organisation.DbPassword = reader["DbPassword"].ToString();
+                    organisation.OrganisationName = reader["OrganisationName"].ToString();
+                    organisation.Address = reader["Address"].ToString();
+                    organisation.Email = reader["Email"].ToString();
+                    organisation.Phone = reader["Phone"].ToString();
+                }
             }
             return organisation;
         }

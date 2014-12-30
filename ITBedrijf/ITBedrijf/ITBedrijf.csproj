@@ -174,9 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412221409051_initDatabase.cs" />
-    <Compile Include="Migrations\201412221409051_initDatabase.Designer.cs">
-      <DependentUpon>201412221409051_initDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201412301144101_init database.cs" />
+    <Compile Include="Migrations\201412301144101_init database.Designer.cs">
+      <DependentUpon>201412301144101_init database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -262,6 +262,8 @@
     <Content Include="Views\Vereniging\NewRegister.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Vereniging\EditRegister.cshtml" />
+    <Content Include="Views\Home\ErrorServer.cshtml" />
+    <Content Include="Views\Home\ErrorLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,8 +276,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412221409051_initDatabase.resx">
-      <DependentUpon>201412221409051_initDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412301144101_init database.resx">
+      <DependentUpon>201412301144101_init database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,7 +30,12 @@ namespace ITBedrijfProject.DataAcces
         {
             DbConnection con = DbProviderFactories.GetFactory(Settings.ProviderName).CreateConnection();
             con.ConnectionString = Settings.ConnectionString;
-            con.Open();
+            try
+            {
+                con.Open();
+            }catch(Exception e){
+                return null;
+            }
 
             return con;
         }
@@ -65,6 +70,7 @@ namespace ITBedrijfProject.DataAcces
 
             try
             {
+                if (con == null) return reader;
                 command = BuildCommand(con, sql, parameters);
                 reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 

@@ -108,9 +108,9 @@ C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.Owi
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.csprojResolveAssemblyReference.cache
-C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.Migrations.initDatabase.resources
-C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.csproj.GenerateResource.Cache
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.dll
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.pdb
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.dll
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.xml
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.Migrations.initdatabase.resources
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.csproj.GenerateResource.Cache

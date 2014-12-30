@@ -13,18 +13,21 @@ namespace ITBedrijf.Controllers
         // GET: Kassa
         public ActionResult Index()
         {
+            if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             ViewBag.Register = DARegister.GetRegisters();
             return View();
         }
         [HttpGet]
         public ActionResult NewRegister()
         {
+            if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             return View();
         }
 
         [HttpPost]
         public ActionResult NewRegister(string registerName, string device, DateTime purchaseDate, DateTime purchaseTime, DateTime expireDate, DateTime expireTime)
         {
+            if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (purchaseDate >= expireDate) return RedirectToAction("Index");
             Register register = new Register();
             register.RegisterName = registerName;

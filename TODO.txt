@@ -4,10 +4,10 @@ lengtes wachtwoorden, formaten
 database mag nie null zijn
 hub?
 css
-beveiliging
-app enkel bruikbaar voor ingelogde user
 cancel
 meer aanpassingen A23
+create database voordat insert database
+index
 
 A31
 A32
