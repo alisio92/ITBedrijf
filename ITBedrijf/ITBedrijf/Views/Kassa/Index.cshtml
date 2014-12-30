@@ -1,20 +1,25 @@
 ﻿@model PMRegister
 <h2>Kassa Overzicht</h2>
 <table>
-    <tr>
-        <td width="200px">@Html.LabelFor(a => a.RegisterName)</td>
-        <td width="200px">@Html.LabelFor(a => a.Device)</td>
-        <td width="200px">@Html.LabelFor(a => a.PurchaseDate)</td>
-        <td width="200px">@Html.LabelFor(a => a.ExpireDate)</td>
+    <tr class="header">
+        <td>@Html.LabelFor(a => a.RegisterName)</td>
+        <td>@Html.LabelFor(a => a.Device)</td>
+        <td>@Html.LabelFor(a => a.PurchaseDate)</td>
+        <td>@Html.LabelFor(a => a.ExpireDate)</td>
     </tr>
     @foreach (var item in @ViewBag.Register)
     {
-        <tr>
+        <tr class="item">
             <td>@item.RegisterName</td>
             <td>@item.Device</td>
             <td>@item.PurchaseDate</td>
             <td>@item.ExpireDate</td>
         </tr>
     }
+    <tr class="link">
+        <td><a href="/Kassa/NewRegister">Kassa Toevoegen</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
-<p><a href="/Kassa/NewRegister">Nieuwe Kassa</a></p>

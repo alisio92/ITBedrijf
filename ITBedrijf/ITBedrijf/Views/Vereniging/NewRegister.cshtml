@@ -3,7 +3,7 @@
 @using (Html.BeginForm("NewRegister", "Vereniging", FormMethod.Post))
 {
 @Html.HiddenFor(a => a.OrganisationID)
-    <table>
+    <table class="form">
         <tr>
             <td>@Html.LabelFor(a => a.RegisterID)</td>
             <td>@Html.DropDownListFor(a => a.RegisterID, Model.NewRegister)</td>
@@ -19,6 +19,13 @@
             <td><input type="date" value="@DateTime.Today" id="UntilDate" name="UntilDate" min="@DateTime.Today.Year-@DateTime.Today.Month-@DateTime.Today.Day" /></td>
             <td><input type="time" value="@DateTime.Today" id="UntilTime" name="UntilTime" /></td>
         </tr>
+        <tr>
+            <td><input type="submit" value="Toevoegen" /></td>
+            <td>
+                <a href="/Vereniging/Register?id=@Html.DisplayFor(a => a.OrganisationID)">
+                    <input type="button" value="Keer Terug" />
+                </a>
+            </td>
+        </tr>
     </table>
-    <input type="submit" value="Toevoegen" />
 }

@@ -1,23 +1,28 @@
 ﻿@model PMOrganisationRegister
 <h2>Kassa's voor @ViewBag.Organisation.OrganisationName:@ViewBag.Organisation.Login</h2>
 <table>
-    <tr>
-        <td width="400px">@Html.LabelFor(a => a.OrganisationName):@Html.LabelFor(a => a.Login)</td>
-        <td width="400px">@Html.LabelFor(a => a.RegisterName):@Html.LabelFor(a => a.Device)</td>
-        <td width="200px">@Html.LabelFor(a => a.FromDate)</td>
-        <td width="200px">@Html.LabelFor(a => a.UntilDate)</td>
+    <tr class="header">
+        <td class="longer">@Html.LabelFor(a => a.OrganisationName):@Html.LabelFor(a => a.Login)</td>
+        <td class="longer">@Html.LabelFor(a => a.RegisterName):@Html.LabelFor(a => a.Device)</td>
+        <td>@Html.LabelFor(a => a.FromDate)</td>
+        <td>@Html.LabelFor(a => a.UntilDate)</td>
+        <td></td>
     </tr>
     @foreach (var item in @ViewBag.Register)
     {
-        <tr>
-            <td>@item.OrganisationName:@item.Login</td>
-            <td>@item.RegisterName:@item.Device</td>
+        <tr class="item">
+            <td class="longer">@item.OrganisationName:@item.Login</td>
+            <td class="longer">@item.RegisterName:@item.Device</td>
             <td>@item.FromDate</td>
             <td>@item.UntilDate</td>
             <td><a href="/Vereniging/EditRegister?organisationID=@ViewBag.Organisation.Id&registerID=@item.RegisterID">Bewerken</a></td>
         </tr>
     }
+    <tr class="link">
+        <td class="longer"><a href="/Vereniging/NewRegister?id=@ViewBag.Organisation.Id">Kassa Toevoegen</a></td>
+        <td class="longer"><a href="/Vereniging/Index">Keer Terug</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
-<p><a href="/Vereniging/NewRegister?id=@ViewBag.Organisation.Id">Kassa Toevoegen</a></p>
-
-

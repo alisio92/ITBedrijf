@@ -3,7 +3,7 @@
 
 @using (Html.BeginForm("NewRegister", "Kassa", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <table>
+    <table class="form">
         <tr>
             <td>@Html.LabelFor(a => a.RegisterName)</td>
             <td>@Html.TextBoxFor(a => a.RegisterName, new { placeholder = Html.DisplayNameFor(a => a.RegisterName) })</td>
@@ -22,6 +22,14 @@
             <td><input type="date" value="@DateTime.Today" id="ExpireDate" name="ExpireDate" min="@DateTime.Today.AddDays(1).Year-@DateTime.Today.AddDays(1).Month-@DateTime.Today.AddDays(1).Day" /></td>
             <td><input type="time" value="@DateTime.Today" id="ExpireTime" name="ExpireTime" /></td>
         </tr>
+        <tr>
+            <td><input type="submit" value="Kassa Toevoegen" /></td>
+            <td>
+                <a href="/Kassa/Index">
+                    <input type="button" value="Keer Terug" />
+                </a>
+            </td>
+            <td></td>
+        </tr>
     </table>
-    <input type="submit" value="Kassa Toevoegen" />
 }

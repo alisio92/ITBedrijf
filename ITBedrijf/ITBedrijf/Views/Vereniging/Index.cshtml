@@ -1,21 +1,28 @@
 ﻿@model PMOrganisation
-<h2>Organistatie Overzicht</h2>
+<h2>Vereniging Overzicht</h2>
 <table>
-    <tr>
-        <td width="200px">@Html.LabelFor(a => a.OrganisationName)</td>
-        <td width="200px">@Html.LabelFor(a => a.Address)</td>
-        <td width="200px">@Html.LabelFor(a => a.Email)</td>
-        <td width="200px">@Html.LabelFor(a => a.Phone)</td>
+    <tr class="header">
+        <td>@Html.LabelFor(a => a.OrganisationName)</td>
+        <td>@Html.LabelFor(a => a.Address)</td>
+        <td>@Html.LabelFor(a => a.Email)</td>
+        <td>@Html.LabelFor(a => a.Phone)</td>
+        <td></td>
     </tr>
     @foreach (var item in @ViewBag.Organisation)
     {
-        <tr>
+        <tr class="item">
             <td>@item.OrganisationName</td>
             <td>@item.Address</td>
             <td>@item.Email</td>
             <td>@item.Phone</td>
             <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Register?id=@item.Id">Kassa's | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
-</tr>
+        </tr>
     }
+    <tr class="link">
+        <td><a href="/Vereniging/NewOrganisation">Vereniging Toevoegen</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
-<p><a href="/Vereniging/NewOrganisation">Nieuwe vereniging</a></p>

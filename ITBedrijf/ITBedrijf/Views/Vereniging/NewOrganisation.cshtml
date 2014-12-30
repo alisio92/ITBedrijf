@@ -2,9 +2,10 @@
 <h2>Vereniging Toevoegen</h2>
 @using (Html.BeginForm("NewOrganisation", "Vereniging", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <table>
+    <table class="form">
         <tr>
-            <td>Persoonlijke Gegevens</td>
+            <td class="title">Persoonlijke Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.Login)</td>
@@ -35,7 +36,8 @@
             <td>@Html.TextBoxFor(a => a.OrganisationName, new { placeholder = Html.DisplayNameFor(a => a.OrganisationName) })</td>
         </tr>
         <tr>
-            <td>Database Gegevens</td>
+            <td class="title">Database Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.DbLogin)</td>
@@ -53,7 +55,14 @@
             <td>@Html.LabelFor(a => a.DbControlePassword)</td>
             <td>@Html.PasswordFor(a => a.DbControlePassword, new { placeholder = Html.DisplayNameFor(a => a.DbControlePassword) })</td>
         </tr>
+        <tr>
+            <td><input type="submit" value="Vereniging Toevoegen" /></td>
+            <td>
+                <a href="/Vereniging/Index">
+                    <input type="button" value="Keer Terug" />
+                </a>
+            </td>
+        </tr>
     </table>
-    <input type="submit" value="Vereniging Toevoegen" />
 }
 

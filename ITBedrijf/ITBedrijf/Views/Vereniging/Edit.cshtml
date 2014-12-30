@@ -3,9 +3,10 @@
 @using (Html.BeginForm("Edit", "Vereniging", FormMethod.Post))
 {
     @Html.HiddenFor(a => a.Id);
-    <table>
+    <table class="form">
         <tr>
-            <td>Persoonlijke Gegevens</td>
+            <td class="title">Persoonlijke Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.Login)</td>
@@ -36,7 +37,8 @@
             <td>@Html.TextBoxFor(a => a.OrganisationName)</td>
         </tr>
         <tr>
-            <td>Database Gegevens</td>
+            <td class="title">Database Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.DbLogin)</td>
@@ -54,7 +56,14 @@
             <td>@Html.LabelFor(a => a.DbControlePassword)</td>
             <td>@Html.PasswordFor(a => a.DbControlePassword)</td>
         </tr>
+        <tr>
+            <td><input type="submit" name="Update" value="Aanpassen" /></td>
+            <td>
+                <a href="/Vereniging/Index">
+                    <input type="button" value="Keer Terug" />
+                </a>
+            </td>
+        </tr>
     </table>
-    <input type="submit" name="Update" value="Aanpassen" />
 }
 

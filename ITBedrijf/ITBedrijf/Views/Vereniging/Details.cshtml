@@ -2,9 +2,10 @@
 <h2>Detail</h2>
 @using (Html.BeginForm("Index", "Vereniging", FormMethod.Post))
 {
-    <table>
+    <table class="form">
         <tr>
-            <td>Persoonlijke Gegevens</td>
+            <td class="title">Persoonlijke Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.Login)</td>
@@ -27,7 +28,8 @@
             <td>@Html.ValueFor(a => a.OrganisationName)</td>
         </tr>
         <tr>
-            <td>Database Gegevens</td>
+            <td class="title">Database Gegevens</td>
+            <td class="title"></td>
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.DbLogin)</td>
@@ -37,6 +39,6 @@
             <td>@Html.LabelFor(a => a.DbName)</td>
             <td>@Html.ValueFor(a => a.DbName)</td>
         </tr>
+        <td><input type="submit" name="Back" value="Keer Terug" /></td>
     </table>
-    <input type="submit" name="Back" value="Terug" />
 }
