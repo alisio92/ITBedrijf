@@ -2,7 +2,7 @@
 <h2>Kassa Toevoegen aan @ViewBag.Organisation.OrganisationName:@ViewBag.Organisation.Login</h2>
 @using (Html.BeginForm("NewRegister", "Vereniging", FormMethod.Post))
 {
-@Html.HiddenFor(a => a.OrganisationID)
+    @Html.HiddenFor(a => a.OrganisationID)
     <table class="form">
         <tr>
             <td>@Html.LabelFor(a => a.RegisterID)</td>
@@ -23,7 +23,7 @@
             <td><input type="submit" value="Toevoegen" /></td>
             <td>
                 <a href="/Vereniging/Register?id=@Html.DisplayFor(a => a.OrganisationID)">
-                    <input type="button" value="Keer Terug" />
+                    <input class="inputWidth" type="button" value="Keer Terug" />
                 </a>
             </td>
         </tr>

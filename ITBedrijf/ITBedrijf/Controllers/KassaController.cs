@@ -1,5 +1,6 @@
 ﻿using ITBedrijf.DataAccess;
 using ITBedrijf.Models;
+using ITBedrijf.PresentationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,33 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewRegister(string registerName, string device, DateTime purchaseDate, DateTime purchaseTime, DateTime expireDate, DateTime expireTime)
+        public ActionResult NewRegister(PMRegister register, DateTime? PurchaseTime, DateTime? ExpireTime)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            if (purchaseDate >= expireDate) return RedirectToAction("Index");
-            Register register = new Register();
-            register.RegisterName = registerName;
-            register.Device = device;
-            register.PurchaseDate = new DateTime(purchaseDate.Year, purchaseDate.Month, purchaseDate.Day, purchaseTime.Hour, purchaseTime.Minute, 0);
-            register.ExpireDate = new DateTime(expireDate.Year, expireDate.Month, expireDate.Day, expireTime.Hour, expireTime.Minute, 0);
 
-            DARegister.InsertRegister(register);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (register.PurchaseDate >= register.ExpireDate) return View(register);
+                register.PurchaseDate = new DateTime(register.PurchaseDate.Year, register.PurchaseDate.Month, register.PurchaseDate.Day, PurchaseTime.Value.Hour, PurchaseTime.Value.Minute, 0);
+                register.ExpireDate = new DateTime(register.ExpireDate.Year, register.ExpireDate.Month, register.ExpireDate.Day, ExpireTime.Value.Hour, ExpireTime.Value.Minute, 0);
+                DARegister.InsertRegister(register);
+                return RedirectToAction("Index");
+            }
+            return View(register);
+        }
+
+        [HttpGet]
+        public ActionResult Log(int id)
+        {
+            ViewBag.Log = DALog.GetLogsById(id);
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Logs()
+        {
+            ViewBag.Log = DALog.GetErrorlog();
+            return View();
         }
     }
 }

@@ -13,10 +13,12 @@ namespace ITBedrijf.Models
 
         [Required]
         [DisplayName("Naam Kassa")]
+        [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} karakters lang zijn.", MinimumLength = 2)]
         public string RegisterName { get; set; }
 
         [Required]
         [DisplayName("Naam Toestel")]
+        [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} karakters lang zijn.", MinimumLength = 2)]
         public string Device { get; set; }
 
         [Required]

@@ -26,6 +26,7 @@
                     {
                         <li>@Html.ActionLink("Vereniging", "Index", "Vereniging")</li>
                         <li>@Html.ActionLink("Kassa", "Index", "Kassa")</li>
+                        <li>@Html.ActionLink("Logs", "Logs", "Kassa")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -36,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ITBedrijf</p>
         </footer>
     </div>
 

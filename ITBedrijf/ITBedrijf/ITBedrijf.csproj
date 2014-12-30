@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VerenigingController.cs" />
     <Compile Include="DataAccess\CreateDb.cs" />
+    <Compile Include="DataAccess\DALog.cs" />
     <Compile Include="DataAccess\DAOrganisation.cs" />
     <Compile Include="DataAccess\DAOrganisationregister.cs" />
     <Compile Include="DataAccess\DARegister.cs" />
@@ -180,12 +181,14 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Errorlog.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrganisationRegister.cs" />
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="OnMethodBoundaryAttribute1.cs" />
+    <Compile Include="PresentationModels\PMLog.cs" />
     <Compile Include="PresentationModels\PMOrganisation.cs" />
     <Compile Include="PresentationModels\PMOrganisationRegister.cs" />
     <Compile Include="PresentationModels\PMRegister.cs" />
@@ -265,6 +268,8 @@
     <Content Include="Views\Vereniging\EditRegister.cshtml" />
     <Content Include="Views\Home\ErrorServer.cshtml" />
     <Content Include="Views\Home\ErrorLogin.cshtml" />
+    <Content Include="Views\Kassa\Logs.cshtml" />
+    <Content Include="Views\Kassa\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

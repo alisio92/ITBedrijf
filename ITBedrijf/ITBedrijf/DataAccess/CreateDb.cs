@@ -12,7 +12,7 @@ namespace ITBedrijf.DataAccess
 {
     public class CreateDb
     {
-        public static void CreateDatabase(Organisation o)
+        public static Boolean CreateDatabase(Organisation o)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
             string create = File.ReadAllText(path + "\\Data\\create.txt");
@@ -38,7 +38,9 @@ namespace ITBedrijf.DataAccess
             {
                 trans.Rollback();
                 Console.WriteLine(ex.Message);
+                return false;
             }
+            return true;
         }
 
         private static string[] RemoveGo(string input)

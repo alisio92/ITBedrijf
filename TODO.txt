@@ -1,11 +1,5 @@
-gegevens opslaan in sessie als er fouten gebeuren in toevoegen van gegevens
-zeggen wat er fout loopt in toevoegen en in date picker
-lengtes wachtwoorden, formaten
-database mag nie null zijn
 hub?
 meer aanpassingen A23
-create database voordat insert database
-index
-
-A31
-A32
+kassa kunnen aanpassen
+meerdere pagina's als er 100 records zijn
+organisatie mag aangemaakte database niet meer aanpassen

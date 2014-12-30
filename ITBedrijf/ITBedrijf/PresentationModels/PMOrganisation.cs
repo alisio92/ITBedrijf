@@ -13,10 +13,12 @@ namespace ITBedrijf.PresentationModels
     {
         [Required]
         [DisplayName("Controle Wachtwoord")]
+        [Compare("Password", ErrorMessage = "Het wachtwoord en het controle wachtwoord zijn niet gelijk.")]
         public string ControlePassword { get; set; }
 
         [Required]
         [DisplayName("Database Controle Wachtwoord")]
+        [Compare("DbPassword", ErrorMessage = "Het wachtwoord en het controle wachtwoord zijn niet gelijk.")]
         public string DbControlePassword { get; set; }
     }
 }

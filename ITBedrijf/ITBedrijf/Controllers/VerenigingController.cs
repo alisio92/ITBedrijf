@@ -28,26 +28,16 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewOrganisation(string login, string password, string controlePassword, string dbName, string dbLogin, string dbPassword, string dbControlePassword, string organisationName, string address, string email, string phone)
+        public ActionResult NewOrganisation(PMOrganisation organisation)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            if (password == controlePassword && dbPassword == dbControlePassword)
-            {
-                Organisation organisation = new Organisation();
-                organisation.Login = login;
-                organisation.Password = password;
-                organisation.DbName = dbName;
-                organisation.DbLogin = dbLogin;
-                organisation.DbPassword = dbPassword;
-                organisation.OrganisationName = organisationName;
-                organisation.Address = address;
-                organisation.Email = email;
-                organisation.Phone = phone;
 
-                DAOrganisation.InsertOrganisation(organisation);
+            if (ModelState.IsValid)
+            {
+                if (DAOrganisation.InsertOrganisation(organisation) < 0) return View(organisation);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("NewOrganisation");
+            return View(organisation);
         }
 
         [HttpGet]
@@ -74,15 +64,15 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, string login, string password, string controlePassword, string dbName, string dbLogin, string dbPassword, string dbControlePassword, string organisationName, string address, string email, string phone)
+        public ActionResult Edit(PMOrganisation organisation, int id)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            if (password == controlePassword && dbPassword == dbControlePassword)
+            if (ModelState.IsValid)
             {
-                DAOrganisation.UpdateOrganisation(id, login, password, dbName, dbLogin, dbPassword, organisationName, address, email, phone);
+                DAOrganisation.UpdateOrganisation(id, organisation);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Edit", new { id = id });
+            return RedirectToAction("Edit", new { organisation = organisation, id = id });
         }
 
         [HttpGet]

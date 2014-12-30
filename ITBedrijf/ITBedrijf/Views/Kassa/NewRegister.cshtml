@@ -6,11 +6,13 @@
     <table class="form">
         <tr>
             <td>@Html.LabelFor(a => a.RegisterName)</td>
-            <td>@Html.TextBoxFor(a => a.RegisterName, new { placeholder = Html.DisplayNameFor(a => a.RegisterName) })</td>
+            <<td>@Html.TextBoxFor(a => a.RegisterName, new { placeholder = Html.DisplayNameFor(a => a.RegisterName) })</td>
+            @Html.ValidationMessageFor(a => a.RegisterName)
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.Device)</td>
             <td>@Html.TextBoxFor(a => a.Device, new { placeholder = Html.DisplayNameFor(a => a.Device) })</td>
+            @Html.ValidationMessageFor(a => a.Device)
         </tr>
         <tr>
             <td>@Html.LabelFor(a => a.PurchaseDate)</td>

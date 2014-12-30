@@ -55,10 +55,10 @@ namespace ITBedrijf.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Mij Onthouden?")]
         public bool RememberMe { get; set; }
     }
 
@@ -76,7 +76,7 @@ namespace ITBedrijf.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Becestig Paswoord")]
+        [Display(Name = "Bevestig Paswoord")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         [Required]
