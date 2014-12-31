@@ -66,11 +66,11 @@ td{
 input[type='checkbox']{
     width:20px;
 }
+input[type='time']{
+    width:80px;
+}
 .field-validation-error{
     float:left;
     width:960px;
-    height:20px;
-}
-input[type='time']{
-    width:80px;
+    color:red;
 }

@@ -10,13 +10,16 @@
     </tr>
     @foreach (var item in @ViewBag.Register)
     {
-        <tr class="item">
-            <td class="longer">@item.OrganisationName:@item.Login</td>
-            <td class="longer">@item.RegisterName:@item.Device</td>
-            <td>@item.FromDate</td>
-            <td>@item.UntilDate</td>
-            <td><a href="/Vereniging/EditRegister?organisationID=@ViewBag.Organisation.Id&registerID=@item.RegisterID">Bewerken</a></td>
-        </tr>
+        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
+        {
+            <tr class="item">
+                <td class="longer">@item.OrganisationName:@item.Login</td>
+                <td class="longer">@item.RegisterName:@item.Device</td>
+                <td>@item.FromDate</td>
+                <td>@item.UntilDate</td>
+                <td><a href="/Vereniging/EditRegister?organisationID=@ViewBag.Organisation.Id&registerID=@item.RegisterID">Bewerken</a></td>
+            </tr>
+        }
     }
     <tr class="link">
         <td class="longer"><a href="/Vereniging/NewRegister?id=@ViewBag.Organisation.Id">Kassa Toevoegen</a></td>
@@ -26,3 +29,9 @@
         <td></td>
     </tr>
 </table>
+<p>
+    @foreach (var item in @ViewBag.Numbers)
+    {
+        <a href="/Vereniging/Register?id=@ViewBag.Organisation.Id&Offset=@item">@item -</a>
+    }
+</p>

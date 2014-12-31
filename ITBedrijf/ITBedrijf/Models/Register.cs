@@ -10,6 +10,7 @@ namespace ITBedrijf.Models
     public class Register
     {
         public int Id { get; set; }
+        public int Index { get; set; }
 
         [Required]
         [DisplayName("Naam Kassa")]

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ITBedrijf.DataAccess;
+using ITBedrijf.Hubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -38,6 +40,11 @@ namespace ITBedrijf.Controllers
         }
 
         public ActionResult ErrorLogin()
+        {
+            return View();
+        }
+
+        public ActionResult ErrorParamaters()
         {
             return View();
         }

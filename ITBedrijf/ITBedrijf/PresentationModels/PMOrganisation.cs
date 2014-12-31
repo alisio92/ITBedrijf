@@ -20,5 +20,7 @@ namespace ITBedrijf.PresentationModels
         [DisplayName("Database Controle Wachtwoord")]
         [Compare("DbPassword", ErrorMessage = "Het wachtwoord en het controle wachtwoord zijn niet gelijk.")]
         public string DbControlePassword { get; set; }
+
+        public string Error { get; set; }
     }
 }

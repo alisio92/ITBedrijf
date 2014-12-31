@@ -9,12 +9,15 @@
     </tr>
     @foreach (var item in @ViewBag.Log)
     {
-        <tr class="item">
-            <td class="longer">@item.RegisterName:@item.Device</td>
-            <td>@item.Timestamp</td>
-            <td>@item.Message</td>
-            <td>@item.Stacktrace</td>
-        </tr>
+        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
+        {
+            <tr class="item">
+                <td class="longer">@item.RegisterName:@item.Device</td>
+                <td>@item.Timestamp</td>
+                <td>@item.Message</td>
+                <td>@item.Stacktrace</td>
+            </tr>
+        }
     }
     <tr class="link">
         <td class="longer"><a href="/Kassa/Index">Keer Terug</a></td>
@@ -23,3 +26,9 @@
         <td></td>
     </tr>
 </table>
+<p>
+    @foreach (var item in @ViewBag.Numbers)
+    {
+        <a href="/Kassa/Log?id=@ViewBag.Id&Offset=@item">@item -</a>
+    }
+</p>

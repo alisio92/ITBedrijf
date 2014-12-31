@@ -26,9 +26,11 @@ namespace ITBedrijf.DataAccess
             if (reader != null)
             {
                 organisationRegisters = new List<OrganisationRegister>();
+                int index = 0;
                 while (reader.Read())
                 {
                     OrganisationRegister organisationRegister = new OrganisationRegister();
+                    organisationRegister.Index = index++;
                     organisationRegister.OrganisationID = (int)reader["OrganisationID"];
                     organisationRegister.RegisterID = (int)reader["RegisterID"];
                     organisationRegister.FromDate = (DateTime)reader["FromDate"];

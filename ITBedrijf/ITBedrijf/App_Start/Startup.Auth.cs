@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ITBedrijf.Models;
+using Microsoft.AspNet.SignalR;
 
 namespace ITBedrijf
 {
@@ -15,6 +16,7 @@ namespace ITBedrijf
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
+            app.MapSignalR(new HubConfiguration() { EnableDetailedErrors = true });
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);

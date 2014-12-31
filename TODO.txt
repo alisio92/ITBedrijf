@@ -1,5 +1,1 @@
-hub?
-meer aanpassingen A23
-kassa kunnen aanpassen
-meerdere pagina's als er 100 records zijn
-organisatie mag aangemaakte database niet meer aanpassen
+controle data

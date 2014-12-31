@@ -1,4 +1,6 @@
 ﻿using ITBedrijf.DataAccess;
+using ITBedrijf.Extra;
+using ITBedrijf.Hubs;
 using ITBedrijf.Models;
 using ITBedrijf.PresentationModels;
 using ITBedrijfProject.DataAcces;
@@ -7,20 +9,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ITBedrijf.Controllers
 {
     public class VerenigingController : Controller
     {
         // GET: Vereneging
-        public ActionResult Index()
+        [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
+        public ActionResult Index(int? offset)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            ViewBag.Organisation = DAOrganisation.GetOrganisations();
+            if (!offset.HasValue) offset = 0;
+            int aantal = 10;
+            List<Organisation> organisation = DAOrganisation.GetOrganisations();
+            ViewBag.Organisation = organisation;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(organisation.Count(),aantal));
+            ViewBag.Stop = (aantal * offset) + aantal;
+            ViewBag.Start = offset * aantal;
             return View();
+
         }
 
         [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
         public ActionResult NewOrganisation()
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
@@ -34,13 +47,21 @@ namespace ITBedrijf.Controllers
 
             if (ModelState.IsValid)
             {
-                if (DAOrganisation.InsertOrganisation(organisation) < 0) return View(organisation);
+                if (DAOrganisation.InsertOrganisation(organisation) < 0)
+                {
+                    organisation.Error = "Login Naam Database bestaat al.";
+                    return View(organisation);
+                }
+                var hub = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<Counters>();
+                int amountOrganisations = DAOrganisation.GetOrganisations().Count;
+                hub.Clients.All.NumberOffOrganisations(amountOrganisations);
                 return RedirectToAction("Index");
             }
             return View(organisation);
         }
 
         [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
         public ActionResult Details(int id)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
@@ -56,6 +77,7 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
         public ActionResult Edit(int id)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
@@ -76,15 +98,23 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register(int id)
+        [OutputCache(CacheProfile = "CacheDefault")]
+        public ActionResult Register(int id, int? offset)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            ViewBag.Register = DAOrganisationRegister.GetOrganisationRegisterById(id);
+            if (!offset.HasValue) offset = 0;
+            int aantal = 10;
+            List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id);
+            ViewBag.Register = register;
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(register.Count(), aantal));
+            ViewBag.Stop = (aantal * offset) + aantal;
+            ViewBag.Start = offset * aantal;
             return View();
         }
 
         [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
         public ActionResult NewRegister(int id)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
@@ -96,21 +126,24 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewRegister(int organisationID, int registerID, DateTime FromDate, DateTime FromTime, DateTime UntilDate, DateTime UntilTime)
+        public ActionResult NewRegister(int organisationID, int registerID, PMOrganisationRegister organisationRegister, DateTime? FromTime, DateTime? UntilTime)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            if (FromDate >= UntilDate) return RedirectToAction("Register", new { id = organisationID });
-            OrganisationRegister organisationRegister = new OrganisationRegister();
             organisationRegister.OrganisationID = organisationID;
-            organisationRegister.RegisterID = registerID;
-            organisationRegister.FromDate = new DateTime(FromDate.Year, FromDate.Month, FromDate.Day, FromTime.Hour, FromTime.Minute, 0);
-            organisationRegister.UntilDate = new DateTime(UntilDate.Year, UntilDate.Month, UntilDate.Day, UntilTime.Hour, UntilTime.Minute, 0);
+            if (ModelState.IsValid)
+            {
+                if (organisationRegister.FromDate >= organisationRegister.UntilDate) return RedirectToAction("Register", new { id = organisationID });
+                organisationRegister.FromDate = new DateTime(organisationRegister.FromDate.Year, organisationRegister.FromDate.Month, organisationRegister.FromDate.Day, FromTime.Value.Hour, FromTime.Value.Minute, 0);
+                organisationRegister.UntilDate = new DateTime(organisationRegister.UntilDate.Year, organisationRegister.UntilDate.Month, organisationRegister.UntilDate.Day, UntilTime.Value.Hour, UntilTime.Value.Minute, 0);
 
-            DAOrganisationRegister.InsertOrganisationRegister(organisationRegister);
-            return RedirectToAction("Register", new { id = organisationID });
+                DAOrganisationRegister.InsertOrganisationRegister(organisationRegister);
+                return RedirectToAction("Register", new { id = organisationID });
+            }
+            return RedirectToAction("NewRegister", new { id = organisationID });
         }
 
         [HttpGet]
+        [OutputCache(CacheProfile = "CacheDefault")]
         public ActionResult EditRegister(int organisationID, int registerID)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");

@@ -2,7 +2,11 @@
 <h2>Vereniging Aanpassen</h2>
 @using (Html.BeginForm("Edit", "Vereniging", FormMethod.Post))
 {
-    @Html.HiddenFor(a => a.Id);
+    @Html.HiddenFor(a => a.Id)
+    @Html.HiddenFor(a => a.DbLogin)
+    @Html.HiddenFor(a => a.DbName)
+    @Html.HiddenFor(a => a.DbPassword)
+    <input type="hidden" value="@Html.DisplayFor(a => a.DbPassword)" name="DbControlePassword" />
     <table class="form">
         <tr>
             <td class="title">Persoonlijke Gegevens</td>
@@ -42,30 +46,6 @@
             <td>@Html.LabelFor(a => a.OrganisationName)</td>
             <td>@Html.TextBoxFor(a => a.OrganisationName, new { placeholder = Html.DisplayNameFor(a => a.OrganisationName) })</td>
             @Html.ValidationMessageFor(a => a.OrganisationName)
-        </tr>
-        <tr>
-            <td class="title">Database Gegevens</td>
-            <td class="title"></td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.DbLogin)</td>
-            <td>@Html.TextBoxFor(a => a.DbLogin, new { placeholder = Html.DisplayNameFor(a => a.DbLogin) })</td>
-            @Html.ValidationMessageFor(a => a.DbLogin)
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.DbName)</td>
-            <td>@Html.TextBoxFor(a => a.DbName, new { placeholder = Html.DisplayNameFor(a => a.DbName) })</td>
-            @Html.ValidationMessageFor(a => a.DbName)
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.DbPassword)</td>
-            <td>@Html.PasswordFor(a => a.DbPassword, new { placeholder = Html.DisplayNameFor(a => a.DbPassword) })</td>
-            @Html.ValidationMessageFor(a => a.DbPassword)
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.DbControlePassword)</td>
-            <td>@Html.PasswordFor(a => a.DbControlePassword, new { placeholder = Html.DisplayNameFor(a => a.DbControlePassword) })</td>
-            @Html.ValidationMessageFor(a => a.DbControlePassword)
         </tr>
         <tr>
             <td><input type="submit" name="Update" value="Aanpassen" /></td>

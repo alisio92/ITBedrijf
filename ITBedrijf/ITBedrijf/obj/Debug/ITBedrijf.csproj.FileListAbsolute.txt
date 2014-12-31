@@ -114,3 +114,7 @@ C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.dll
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\PostSharp.xml
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.Migrations.initdatabase.resources
 C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\obj\Debug\ITBedrijf.csproj.GenerateResource.Cache
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\alisio\Documents\GitHub\ITBedrijf\ITBedrijf\ITBedrijf\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PostSharp">
       <HintPath>..\packages\PostSharp.4.1.6-alpha\lib\net35-client\PostSharp.dll</HintPath>
@@ -172,9 +178,11 @@
     <Compile Include="DataAccess\DAOrganisationregister.cs" />
     <Compile Include="DataAccess\DARegister.cs" />
     <Compile Include="DataAccess\Database.cs" />
+    <Compile Include="Extra\LimitList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\Counters.cs" />
     <Compile Include="Migrations\201412301144101_init database.cs" />
     <Compile Include="Migrations\201412301144101_init database.Designer.cs">
       <DependentUpon>201412301144101_init database.cs</DependentUpon>
@@ -211,6 +219,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -270,6 +280,7 @@
     <Content Include="Views\Home\ErrorLogin.cshtml" />
     <Content Include="Views\Kassa\Logs.cshtml" />
     <Content Include="Views\Kassa\Log.cshtml" />
+    <Content Include="Views\Home\ErrorParamaters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

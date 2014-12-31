@@ -1,3 +1,30 @@
-﻿<h2>Welkom</h2>
+﻿<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<h2>Welkom</h2>
 <p>Je moet eerst inloggen om deze app te gerbruiken</p>
 <p>Admin login:alisio.putman&#64;student.howest.be wachtwoord:123456</p>
+<p id="amountOrganisations"></p>
+<p id="amountRegisters"></p>
+<p id="amountLogs"></p>
+<script>
+    $(function () {
+        var counters = $.connection.counters;
+        $.connection.hub.start().done(function () {
+            counters.server.getAmountOrganisations();
+            counters.server.getAmountLogs();
+            counters.server.getAmountRegisters();
+        });
+
+        counters.client.numberOffOrganisations = function (numberOffFiles) {
+            $('#amountOrganisations').text("Totaal aantal Verenigingen: " + numberOffFiles);
+        }
+
+        counters.client.numberOffLogs = function (numberOffFiles) {
+            $('#amountLogs').text("Totaal aantal Logs: " + numberOffFiles);
+        }
+
+        counters.client.numberOffRegisters = function (numberOffFiles) {
+            $('#amountRegisters').text("Totaal aantal kassa's: " + numberOffFiles);
+        }
+    });
+</script>

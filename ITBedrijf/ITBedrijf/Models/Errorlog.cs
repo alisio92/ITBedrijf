@@ -9,6 +9,7 @@ namespace ITBedrijf.Models
     public class Errorlog
     {
         public int RegisterID { get; set; }
+        public int Index { get; set; }
 
         [DisplayName("Naam Kassa")]
         public string RegisterName { get; set; }

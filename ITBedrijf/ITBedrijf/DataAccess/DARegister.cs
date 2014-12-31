@@ -19,9 +19,11 @@ namespace ITBedrijf.DataAccess
             if (reader != null)
             {
                 Registers = new List<Register>();
+                int index = 0;
                 while (reader.Read())
                 {
                     Register register = new Register();
+                    register.Index = index++;
                     register.Id = (int)reader["ID"];
                     register.RegisterName = reader["RegisterName"].ToString();
                     register.Device = reader["Device"].ToString();

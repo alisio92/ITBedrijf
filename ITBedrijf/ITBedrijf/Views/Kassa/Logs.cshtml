@@ -1,5 +1,8 @@
 ﻿@model PMLog
+<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
 <h2>Logs Overzicht</h2>
+<p id="amountLogs"></p>
 <table>
     <tr class="header">
         <td class="longer">@Html.LabelFor(a => a.RegisterName):@Html.LabelFor(a => a.Device)</td>
@@ -9,12 +12,33 @@
     </tr>
     @foreach (var item in @ViewBag.Log)
     {
-        <tr class="item">
-            <td class="longer">@item.RegisterName:@item.Device</td>
-            <td>@item.Timestamp</td>
-            <td>@item.Message</td>
-            <td>@item.Stacktrace</td>
-        </tr>
+        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
+        {
+            <tr class="item">
+                <td class="longer">@item.RegisterName:@item.Device</td>
+                <td>@item.Timestamp</td>
+                <td>@item.Message</td>
+                <td>@item.Stacktrace</td>
+            </tr>
+        }
     }
 </table>
+<p>
+    @foreach (var item in @ViewBag.Numbers)
+    {
+        <a href="/Kassa/Logs?Offset=@item">@item -</a>
+    }
+</p>
+<script>
+    $(function () {
+        var counters = $.connection.counters;
+        $.connection.hub.start().done(function () {
+            counters.server.getAmountLogs();
+        });
+
+        counters.client.numberOffLogs= function (numberOffFiles) {
+            $('#amountLogs').text("Totaal aantal Logs: " + numberOffFiles);
+        }
+    });
+</script>
 

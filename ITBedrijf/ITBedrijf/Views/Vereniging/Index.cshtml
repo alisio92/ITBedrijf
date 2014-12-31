@@ -1,5 +1,8 @@
 ﻿@model PMOrganisation
+<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
 <h2>Vereniging Overzicht</h2>
+<p id="amountOrganisations"></p>
 <table>
     <tr class="header">
         <td>@Html.LabelFor(a => a.OrganisationName)</td>
@@ -10,13 +13,16 @@
     </tr>
     @foreach (var item in @ViewBag.Organisation)
     {
-        <tr class="item">
-            <td>@item.OrganisationName</td>
-            <td>@item.Address</td>
-            <td>@item.Email</td>
-            <td>@item.Phone</td>
-            <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Register?id=@item.Id">Kassa's | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
-        </tr>
+        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
+        {
+            <tr class="item">
+                <td>@item.OrganisationName</td>
+                <td>@item.Address</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Register?id=@item.Id">Kassa's | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
+            </tr>
+        }
     }
     <tr class="link">
         <td><a href="/Vereniging/NewOrganisation">Vereniging Toevoegen</a></td>
@@ -26,3 +32,21 @@
         <td></td>
     </tr>
 </table>
+<p>
+    @foreach (var item in @ViewBag.Numbers)
+    {
+        <a href="/Vereniging/Index?Offset=@item">@item -</a>
+    }  
+</p>
+<script>
+    $(function () {
+        var counters = $.connection.counters;
+        $.connection.hub.start().done(function () {
+            counters.server.getAmountOrganisations();
+        });
+
+        counters.client.numberOffOrganisations = function (numberOffFiles) {
+            $('#amountOrganisations').text("Totaal aantal Verenigingen: " + numberOffFiles);
+        }
+    });
+</script>

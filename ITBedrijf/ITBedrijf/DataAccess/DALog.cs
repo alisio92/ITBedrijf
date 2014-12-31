@@ -21,9 +21,11 @@ namespace ITBedrijf.DataAccess
             if (reader != null)
             {
                 Errorlog = new List<Errorlog>();
+                int index = 0;
                 while (reader.Read())
                 {
                     Errorlog errorlog = new Errorlog();
+                    errorlog.Index = index++;
                     errorlog.RegisterID = (int)reader["RegisterID"];
                     errorlog.RegisterName = errorlog.Message = reader["RegisterName"].ToString();
                     errorlog.Device = errorlog.Message = reader["Device"].ToString();
@@ -50,9 +52,11 @@ namespace ITBedrijf.DataAccess
             if (reader != null)
             {
                 Errorlog = new List<Errorlog>();
+                int index = 0;
                 while (reader.Read())
                 {
                     Errorlog errorlog = new Errorlog();
+                    errorlog.Index = index++;
                     errorlog.RegisterID = (int)reader["RegisterID"];
                     errorlog.RegisterName = errorlog.Message = reader["RegisterName"].ToString();
                     errorlog.Device = errorlog.Message = reader["Device"].ToString();

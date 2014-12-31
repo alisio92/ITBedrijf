@@ -10,7 +10,7 @@
         <tr>
             <td>@Html.LabelFor(a => a.OrganisationName)</td>
             <td>@Html.DropDownListFor(a => a.OrganisationID, Model.NewOrganisation)</td>
-            <td>@Html.ValidationMessageFor(a => a.OrganisationID)</td>
+            @Html.ValidationMessageFor(a => a.OrganisationID)
         </tr>
         <tr>
             <td><input type="submit" value="Aanpassen" /></td>

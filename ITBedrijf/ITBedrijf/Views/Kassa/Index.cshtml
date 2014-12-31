@@ -1,5 +1,8 @@
 ﻿@model PMRegister
+<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
 <h2>Kassa Overzicht</h2>
+<p id="amountRegisters"></p>
 <table>
     <tr class="header">
         <td>@Html.LabelFor(a => a.RegisterName)</td>
@@ -10,13 +13,16 @@
     </tr>
     @foreach (var item in @ViewBag.Register)
     {
-        <tr class="item">
-            <td>@item.RegisterName</td>
-            <td>@item.Device</td>
-            <td>@item.PurchaseDate</td>
-            <td>@item.ExpireDate</td>
-            <td><a href="/Kassa/Log?id=@item.Id">Logs</a></td>
-        </tr>
+        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
+        {
+            <tr class="item">
+                <td>@item.RegisterName</td>
+                <td>@item.Device</td>
+                <td>@item.PurchaseDate</td>
+                <td>@item.ExpireDate</td>
+                <td><a href="/Kassa/Log?id=@item.Id">Logs</a></td>
+            </tr>
+        }
     }
     <tr class="link">
         <td><a href="/Kassa/NewRegister">Kassa Toevoegen</a></td>
@@ -26,3 +32,21 @@
         <td></td>
     </tr>
 </table>
+<p>
+    @foreach (var item in @ViewBag.Numbers)
+    {
+        <a href="/Kassa/Index?Offset=@item">@item -</a>
+    }
+</p>
+<script>
+    $(function () {
+        var counters = $.connection.counters;
+        $.connection.hub.start().done(function () {
+            counters.server.getAmountRegisters();
+        });
+
+        counters.client.numberOffRegisters = function (numberOffFiles) {
+            $('#amountRegisters').text("Totaal aantal kassa's: " + numberOffFiles);
+        }
+    });
+</script>

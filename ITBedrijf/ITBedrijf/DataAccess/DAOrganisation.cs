@@ -20,9 +20,11 @@ namespace ITBedrijf.DataAccess
             if (reader != null)
             {
                 Organisations = new List<Organisation>();
+                int index = 0;
                 while (reader.Read())
                 {
                     Organisation organisation = new Organisation();
+                    organisation.Index = index++;
                     organisation.Id = (int)reader["ID"];
                     organisation.Login = reader["Login"].ToString();
                     organisation.Password = reader["Password"].ToString();

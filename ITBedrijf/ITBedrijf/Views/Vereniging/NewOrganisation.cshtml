@@ -2,6 +2,7 @@
 <h2>Vereniging Toevoegen</h2>
 @using (Html.BeginForm("NewOrganisation", "Vereniging", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <p class="field-validation-error">@Html.DisplayFor(a => a.Error)</p>
     <table class="form">
         <tr>
             <td class="title">Persoonlijke Gegevens</td>
