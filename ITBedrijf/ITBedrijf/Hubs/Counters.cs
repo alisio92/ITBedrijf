@@ -11,19 +11,19 @@ namespace ITBedrijf.Hubs
     {
         public void GetAmountOrganisations()
         {
-            int amountOrganisations = DAOrganisation.GetOrganisations().Count;
+            int amountOrganisations = DAOrganisation.GetOrganisationsCount();
             Clients.All.NumberOffOrganisations(amountOrganisations);
         }
 
         public void GetAmountRegisters()
         {
-            int amountRegisters = DARegister.GetRegisters().Count;
+            int amountRegisters = DARegister.GetRegistersCount();
             Clients.All.NumberOffRegisters(amountRegisters);
         }
 
         public void GetAmountLogs()
         {
-            int amountLogs= DALog.GetErrorlog().Count;
+            int amountLogs = DALog.GetErrorlogsCount();
             Clients.All.NumberOffLogs(amountLogs);
         }
     }

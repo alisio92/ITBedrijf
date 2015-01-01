@@ -21,11 +21,9 @@ namespace ITBedrijf.Controllers
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
             int aantal = 10;
-            List<Register> register = DARegister.GetRegisters();
+            List<Register> register = DARegister.GetRegisters(offset.Value, aantal);
             ViewBag.Register = register;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(register.Count(), aantal));
-            ViewBag.Stop = (aantal * offset) + aantal;
-            ViewBag.Start = offset * aantal;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DARegister.GetRegistersCount(), aantal));
             return View();
         }
         [HttpGet]
@@ -48,7 +46,7 @@ namespace ITBedrijf.Controllers
                 register.ExpireDate = new DateTime(register.ExpireDate.Year, register.ExpireDate.Month, register.ExpireDate.Day, ExpireTime.Value.Hour, ExpireTime.Value.Minute, 0);
                 DARegister.InsertRegister(register);
                 var hub = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<Counters>();
-                int amountRegisters = DARegister.GetRegisters().Count;
+                int amountRegisters = DARegister.GetRegistersCount();
                 hub.Clients.All.NumberOffRegisters(amountRegisters);
                 return RedirectToAction("Index");
             }
@@ -62,11 +60,9 @@ namespace ITBedrijf.Controllers
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
             int aantal = 10;
-            List<Errorlog> log = DALog.GetLogsById(id);
+            List<Errorlog> log = DALog.GetLogsById(id, offset.Value, aantal);
             ViewBag.Log = log;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(log.Count(), aantal));
-            ViewBag.Stop = (aantal * offset) + aantal;
-            ViewBag.Start = offset * aantal;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(id), aantal));
             ViewBag.Id = id;
             return View();
         }
@@ -78,11 +74,9 @@ namespace ITBedrijf.Controllers
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
             int aantal = 10;
-            List<Errorlog> log = DALog.GetErrorlog();
+            List<Errorlog> log = DALog.GetErrorlog(offset.Value, aantal);
             ViewBag.Log = log;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(log.Count(), aantal));
-            ViewBag.Stop = (aantal * offset) + aantal;
-            ViewBag.Start = offset * aantal;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(), aantal));
             return View();
         }
     }

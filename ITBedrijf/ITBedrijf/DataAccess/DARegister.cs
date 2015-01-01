@@ -11,10 +11,37 @@ namespace ITBedrijf.DataAccess
 {
     public class DARegister
     {
-        public static List<Register> GetRegisters()
+        //public static List<Register> GetRegisters()
+        //{
+        //    string sql = "SELECT ID, RegisterName, Device, PurchaseDate, ExpireDate FROM Registers";
+        //    DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
+        //    List<Register> Registers = null;
+        //    if (reader != null)
+        //    {
+        //        Registers = new List<Register>();
+        //        int index = 0;
+        //        while (reader.Read())
+        //        {
+        //            Register register = new Register();
+        //            register.Index = index++;
+        //            register.Id = (int)reader["ID"];
+        //            register.RegisterName = reader["RegisterName"].ToString();
+        //            register.Device = reader["Device"].ToString();
+        //            register.PurchaseDate = (DateTime)reader["PurchaseDate"];
+        //            register.ExpireDate = (DateTime)reader["ExpireDate"];
+        //            Registers.Add(register);
+        //        }
+        //    }
+            
+        //    return Registers;
+        //}
+
+        public static List<Register> GetRegisters(int offset, int aantal)
         {
-            string sql = "SELECT ID, RegisterName, Device, PurchaseDate, ExpireDate FROM Registers";
-            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
+            string sql = "SELECT ID, RegisterName, Device, PurchaseDate, ExpireDate FROM Registers ORDER BY ID OFFSET @Offset ROWS FETCH NEXT @Aatal ROWS ONLY";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@Offset", offset * aantal);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@Aatal", aantal);
+            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1, par2);
             List<Register> Registers = null;
             if (reader != null)
             {
@@ -32,8 +59,20 @@ namespace ITBedrijf.DataAccess
                     Registers.Add(register);
                 }
             }
-            
+
             return Registers;
+        }
+
+        public static int GetRegistersCount()
+        {
+            string sql = "SELECT count(*) as count FROM Registers";
+            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql);
+            if (reader != null)
+            {
+                reader.Read();
+                return (int)reader["count"];
+            }
+            return 0;
         }
 
         public static int InsertRegister(Register register)

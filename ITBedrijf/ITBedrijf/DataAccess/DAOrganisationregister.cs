@@ -11,7 +11,41 @@ namespace ITBedrijf.DataAccess
 {
     public class DAOrganisationRegister
     {
-        public static List<OrganisationRegister> GetOrganisationRegisterById(int id)
+        //public static List<OrganisationRegister> GetOrganisationRegisterById(int id)
+        //{
+        //    string sql = "SELECT Organisations.OrganisationName, Organisations.Login, Organisation_Register.OrganisationID, Registers.RegisterName, Registers.Device, Organisation_Register.RegisterID, Organisation_Register.FromDate, Organisation_Register.UntilDate";
+        //    sql += " FROM Organisation_Register";
+        //    sql += " INNER JOIN Organisations";
+        //    sql += " ON Organisation_Register.OrganisationID=Organisations.ID";
+        //    sql += " INNER JOIN Registers";
+        //    sql += " ON Organisation_Register.RegisterID=Registers.ID";
+        //    sql += " WHERE OrganisationID=@OrganisationID";
+        //    DbParameter par1 = Database.AddParameter("AdminDB", "@OrganisationID", id);
+        //    DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
+        //    List<OrganisationRegister> organisationRegisters = null;
+        //    if (reader != null)
+        //    {
+        //        organisationRegisters = new List<OrganisationRegister>();
+        //        int index = 0;
+        //        while (reader.Read())
+        //        {
+        //            OrganisationRegister organisationRegister = new OrganisationRegister();
+        //            organisationRegister.Index = index++;
+        //            organisationRegister.OrganisationID = (int)reader["OrganisationID"];
+        //            organisationRegister.RegisterID = (int)reader["RegisterID"];
+        //            organisationRegister.FromDate = (DateTime)reader["FromDate"];
+        //            organisationRegister.UntilDate = (DateTime)reader["UntilDate"];
+        //            organisationRegister.RegisterName = reader["RegisterName"].ToString();
+        //            organisationRegister.OrganisationName = reader["OrganisationName"].ToString();
+        //            organisationRegister.Login = reader["Login"].ToString();
+        //            organisationRegister.Device = reader["Device"].ToString();
+        //            organisationRegisters.Add(organisationRegister);
+        //        }
+        //    }
+        //    return organisationRegisters;
+        //}
+
+        public static List<OrganisationRegister> GetOrganisationRegisterById(int id, int offset, int aantal)
         {
             string sql = "SELECT Organisations.OrganisationName, Organisations.Login, Organisation_Register.OrganisationID, Registers.RegisterName, Registers.Device, Organisation_Register.RegisterID, Organisation_Register.FromDate, Organisation_Register.UntilDate";
             sql += " FROM Organisation_Register";
@@ -20,8 +54,11 @@ namespace ITBedrijf.DataAccess
             sql += " INNER JOIN Registers";
             sql += " ON Organisation_Register.RegisterID=Registers.ID";
             sql += " WHERE OrganisationID=@OrganisationID";
+            sql += " ORDER BY Organisation_Register.OrganisationID OFFSET @Offset ROWS FETCH NEXT @Aatal ROWS ONLY";
             DbParameter par1 = Database.AddParameter("AdminDB", "@OrganisationID", id);
-            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@Offset", offset * aantal);
+            DbParameter par3 = Database.AddParameter("AdminDB", "@Aatal", aantal);
+            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1, par2, par3);
             List<OrganisationRegister> organisationRegisters = null;
             if (reader != null)
             {
@@ -43,6 +80,19 @@ namespace ITBedrijf.DataAccess
                 }
             }
             return organisationRegisters;
+        }
+
+        public static int GetOrganisationRegisterCount(int id)
+        {
+            string sql = "SELECT count(*) as count FROM Organisation_Register WHERE OrganisationID=@OrganisationID";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@OrganisationID", id);
+            DbDataReader reader = Database.GetData(Database.GetConnection("AdminDB"), sql, par1);
+            if (reader != null)
+            {
+                reader.Read();
+                return (int)reader["count"];
+            }
+            return 0;
         }
 
         public static OrganisationRegister GetOrganisationRegisterByIds(int OrganisationID, int RegisterID)

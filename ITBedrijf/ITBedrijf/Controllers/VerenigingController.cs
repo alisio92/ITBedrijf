@@ -23,11 +23,9 @@ namespace ITBedrijf.Controllers
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
             int aantal = 10;
-            List<Organisation> organisation = DAOrganisation.GetOrganisations();
+            List<Organisation> organisation = DAOrganisation.GetOrganisations(offset.Value, aantal);
             ViewBag.Organisation = organisation;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(organisation.Count(),aantal));
-            ViewBag.Stop = (aantal * offset) + aantal;
-            ViewBag.Start = offset * aantal;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisation.GetOrganisationsCount(), aantal));
             return View();
 
         }
@@ -53,7 +51,7 @@ namespace ITBedrijf.Controllers
                     return View(organisation);
                 }
                 var hub = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<Counters>();
-                int amountOrganisations = DAOrganisation.GetOrganisations().Count;
+                int amountOrganisations = DAOrganisation.GetOrganisationsCount();
                 hub.Clients.All.NumberOffOrganisations(amountOrganisations);
                 return RedirectToAction("Index");
             }
@@ -104,12 +102,10 @@ namespace ITBedrijf.Controllers
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
             int aantal = 10;
-            List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id);
+            List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id, offset.Value, aantal);
             ViewBag.Register = register;
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(register.Count(), aantal));
-            ViewBag.Stop = (aantal * offset) + aantal;
-            ViewBag.Start = offset * aantal;
+            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisationRegister.GetOrganisationRegisterCount(id), aantal));
             return View();
         }
 
@@ -119,7 +115,7 @@ namespace ITBedrijf.Controllers
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
-            organisationRegister.NewRegister = new MultiSelectList(DARegister.GetRegisters(), "Id", "RegisterName", "Device");
+            organisationRegister.NewRegister = new MultiSelectList(DARegister.GetRegisters(0, DARegister.GetRegistersCount()), "Id", "RegisterName", "Device");
             organisationRegister.OrganisationID = id;
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
             return View(organisationRegister);
@@ -148,7 +144,7 @@ namespace ITBedrijf.Controllers
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
-            organisationRegister.NewOrganisation = new MultiSelectList(DAOrganisation.GetOrganisations(), "Id", "Login", "OrganisationName");
+            organisationRegister.NewOrganisation = new MultiSelectList(DAOrganisation.GetOrganisations(0, DAOrganisation.GetOrganisationsCount()), "Id", "Login", "OrganisationName");
             OrganisationRegister or = DAOrganisationRegister.GetOrganisationRegisterByIds(organisationID, registerID);
             organisationRegister.Device = or.Device;
             organisationRegister.FromDate = or.FromDate;

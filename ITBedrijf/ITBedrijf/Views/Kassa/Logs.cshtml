@@ -12,15 +12,12 @@
     </tr>
     @foreach (var item in @ViewBag.Log)
     {
-        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
-        {
-            <tr class="item">
-                <td class="longer">@item.RegisterName:@item.Device</td>
-                <td>@item.Timestamp</td>
-                <td>@item.Message</td>
-                <td>@item.Stacktrace</td>
-            </tr>
-        }
+        <tr class="item">
+            <td class="longer">@item.RegisterName:@item.Device</td>
+            <td>@item.Timestamp</td>
+            <td>@item.Message</td>
+            <td>@item.Stacktrace</td>
+        </tr>
     }
 </table>
 <p>
@@ -36,7 +33,7 @@
             counters.server.getAmountLogs();
         });
 
-        counters.client.numberOffLogs= function (numberOffFiles) {
+        counters.client.numberOffLogs = function (numberOffFiles) {
             $('#amountLogs').text("Totaal aantal Logs: " + numberOffFiles);
         }
     });

@@ -13,16 +13,13 @@
     </tr>
     @foreach (var item in @ViewBag.Organisation)
     {
-        if (item.Index >= @ViewBag.Start && item.Index < @ViewBag.Stop)
-        {
-            <tr class="item">
-                <td>@item.OrganisationName</td>
-                <td>@item.Address</td>
-                <td>@item.Email</td>
-                <td>@item.Phone</td>
-                <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Register?id=@item.Id">Kassa's | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
-            </tr>
-        }
+        <tr class="item">
+            <td>@item.OrganisationName</td>
+            <td>@item.Address</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td><a href="/Vereniging/Details?id=@item.Id">Details</a> | <a href="/Vereniging/Register?id=@item.Id">Kassa's | <a href="/Vereniging/Edit?id=@item.Id">Bewerken</a>
+        </tr>
     }
     <tr class="link">
         <td><a href="/Vereniging/NewOrganisation">Vereniging Toevoegen</a></td>
@@ -36,7 +33,7 @@
     @foreach (var item in @ViewBag.Numbers)
     {
         <a href="/Vereniging/Index?Offset=@item">@item -</a>
-    }  
+    }
 </p>
 <script>
     $(function () {
