@@ -18,14 +18,16 @@ namespace ITBedrijf.Controllers
         // GET: Vereneging
         [HttpGet]
         [OutputCache(CacheProfile = "CacheDefault")]
-        public ActionResult Index(int? offset)
+        public ActionResult Index(int? offset, int? aantal)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            int aantal = 10;
-            List<Organisation> organisation = DAOrganisation.GetOrganisations(offset.Value, aantal);
+            if (!aantal.HasValue) aantal = 10;
+            List<Organisation> organisation = DAOrganisation.GetOrganisations(offset.Value, aantal.Value);
+            List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisation.GetOrganisationsCount(), aantal.Value));
             ViewBag.Organisation = organisation;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisation.GetOrganisationsCount(), aantal));
+            ViewBag.Numbers = numbers;
+            ViewBag.Length = numbers.Count();
             return View();
 
         }
@@ -71,7 +73,7 @@ namespace ITBedrijf.Controllers
         public ActionResult Details()
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -92,20 +94,22 @@ namespace ITBedrijf.Controllers
                 DAOrganisation.UpdateOrganisation(id, organisation);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Edit", new { organisation = organisation, id = id });
+            return View("Edit", organisation);
         }
 
         [HttpGet]
         [OutputCache(CacheProfile = "CacheDefault")]
-        public ActionResult Register(int id, int? offset)
+        public ActionResult Register(int id, int? offset, int? aantal)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            int aantal = 10;
-            List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id, offset.Value, aantal);
+            if (!aantal.HasValue) aantal = 1;
+            List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id, offset.Value, aantal.Value);
+            List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisationRegister.GetOrganisationRegisterCount(id), aantal.Value));
             ViewBag.Register = register;
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisationRegister.GetOrganisationRegisterCount(id), aantal));
+            ViewBag.Numbers = numbers;
+            ViewBag.Length = numbers.Count();
             return View();
         }
 
@@ -115,7 +119,7 @@ namespace ITBedrijf.Controllers
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             PMOrganisationRegister organisationRegister = new PMOrganisationRegister();
-            organisationRegister.NewRegister = new MultiSelectList(DARegister.GetRegisters(0, DARegister.GetRegistersCount()), "Id", "RegisterName", "Device");
+            organisationRegister.NewRegister = new MultiSelectList(DARegister.GetRegisters(0, DARegister.GetRegistersCount()), "Id", "Device", "RegisterName");
             organisationRegister.OrganisationID = id;
             ViewBag.Organisation = DAOrganisation.GetOrganisationById(id);
             return View(organisationRegister);
@@ -129,8 +133,8 @@ namespace ITBedrijf.Controllers
             if (ModelState.IsValid)
             {
                 if (organisationRegister.FromDate >= organisationRegister.UntilDate) return RedirectToAction("Register", new { id = organisationID });
-                organisationRegister.FromDate = new DateTime(organisationRegister.FromDate.Year, organisationRegister.FromDate.Month, organisationRegister.FromDate.Day, FromTime.Value.Hour, FromTime.Value.Minute, 0);
-                organisationRegister.UntilDate = new DateTime(organisationRegister.UntilDate.Year, organisationRegister.UntilDate.Month, organisationRegister.UntilDate.Day, UntilTime.Value.Hour, UntilTime.Value.Minute, 0);
+                if (FromTime.HasValue) organisationRegister.FromDate = new DateTime(organisationRegister.FromDate.Year, organisationRegister.FromDate.Month, organisationRegister.FromDate.Day, FromTime.Value.Hour, FromTime.Value.Minute, 0);
+                if (UntilTime.HasValue) organisationRegister.UntilDate = new DateTime(organisationRegister.UntilDate.Year, organisationRegister.UntilDate.Month, organisationRegister.UntilDate.Day, UntilTime.Value.Hour, UntilTime.Value.Minute, 0);
 
                 DAOrganisationRegister.InsertOrganisationRegister(organisationRegister);
                 return RedirectToAction("Register", new { id = organisationID });

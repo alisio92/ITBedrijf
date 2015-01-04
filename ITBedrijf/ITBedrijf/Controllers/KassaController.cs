@@ -16,14 +16,16 @@ namespace ITBedrijf.Controllers
         // GET: Kassa
         [HttpGet]
         [OutputCache(CacheProfile = "CacheDefault")]
-        public ActionResult Index(int? offset)
+        public ActionResult Index(int? offset, int? aantal)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            int aantal = 10;
-            List<Register> register = DARegister.GetRegisters(offset.Value, aantal);
+            if (!aantal.HasValue) aantal = 10;
+            List<Register> register = DARegister.GetRegisters(offset.Value, aantal.Value);
+            List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DARegister.GetRegistersCount(), aantal.Value));
             ViewBag.Register = register;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DARegister.GetRegistersCount(), aantal));
+            ViewBag.Numbers = numbers;
+            ViewBag.Length = numbers.Count();
             return View();
         }
         [HttpGet]
@@ -35,15 +37,14 @@ namespace ITBedrijf.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewRegister(PMRegister register, DateTime? PurchaseTime, DateTime? ExpireTime)
+        public ActionResult NewRegister(PMRegister register, DateTime? purchaseTime, DateTime? expireTime)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
-
             if (ModelState.IsValid)
             {
                 if (register.PurchaseDate >= register.ExpireDate) return View(register);
-                register.PurchaseDate = new DateTime(register.PurchaseDate.Year, register.PurchaseDate.Month, register.PurchaseDate.Day, PurchaseTime.Value.Hour, PurchaseTime.Value.Minute, 0);
-                register.ExpireDate = new DateTime(register.ExpireDate.Year, register.ExpireDate.Month, register.ExpireDate.Day, ExpireTime.Value.Hour, ExpireTime.Value.Minute, 0);
+                if (purchaseTime.HasValue) register.PurchaseDate = new DateTime(register.PurchaseDate.Year, register.PurchaseDate.Month, register.PurchaseDate.Day, purchaseTime.Value.Hour, purchaseTime.Value.Minute, 0);
+                if (expireTime.HasValue) register.ExpireDate = new DateTime(register.ExpireDate.Year, register.ExpireDate.Month, register.ExpireDate.Day, expireTime.Value.Hour, expireTime.Value.Minute, 0);
                 DARegister.InsertRegister(register);
                 var hub = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<Counters>();
                 int amountRegisters = DARegister.GetRegistersCount();
@@ -55,28 +56,32 @@ namespace ITBedrijf.Controllers
 
         [HttpGet]
         [OutputCache(CacheProfile = "CacheDefault")]
-        public ActionResult Log(int id, int? offset)
+        public ActionResult Log(int id, int? offset, int? aantal)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            int aantal = 10;
-            List<Errorlog> log = DALog.GetLogsById(id, offset.Value, aantal);
+            if (!aantal.HasValue) aantal = 10;
+            List<Errorlog> log = DALog.GetLogsById(id, offset.Value, aantal.Value);
+            List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(id), aantal.Value));
             ViewBag.Log = log;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(id), aantal));
+            ViewBag.Numbers = numbers;
+            ViewBag.Length = numbers.Count();
             ViewBag.Id = id;
             return View();
         }
 
         [HttpGet]
         [OutputCache(CacheProfile = "CacheDefault")]
-        public ActionResult Logs(int? offset)
+        public ActionResult Logs(int? offset, int? aantal)
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            int aantal = 10;
-            List<Errorlog> log = DALog.GetErrorlog(offset.Value, aantal);
+            if (!aantal.HasValue) aantal = 10;
+            List<Errorlog> log = DALog.GetErrorlog(offset.Value, aantal.Value);
+            List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(), aantal.Value));
             ViewBag.Log = log;
-            ViewBag.Numbers = LimitList.GetNumberList(LimitList.GetAantal(DALog.GetErrorlogsCount(), aantal));
+            ViewBag.Length = numbers.Count();
+            ViewBag.Numbers = numbers;
             return View();
         }
     }

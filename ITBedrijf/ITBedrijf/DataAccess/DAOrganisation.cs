@@ -1,4 +1,5 @@
-﻿using ITBedrijf.Models;
+﻿using ITBedrijf.Extra;
+using ITBedrijf.Models;
 using ITBedrijf.PresentationModels;
 using ITBedrijfProject.DataAcces;
 using System;
@@ -71,10 +72,12 @@ namespace ITBedrijf.DataAccess
                     organisation.Index = index++;
                     organisation.Id = (int)reader["ID"];
                     organisation.Login = reader["Login"].ToString();
-                    organisation.Password = reader["Password"].ToString();
+                    string decryptedPassword = Cryptography.Decrypt(reader["Password"].ToString());
+                    organisation.Password = decryptedPassword;
                     organisation.DbName = reader["DbName"].ToString();
                     organisation.DbLogin = reader["DbLogin"].ToString();
-                    organisation.DbPassword = reader["DbPassword"].ToString();
+                    string decryptedDBPassword = Cryptography.Decrypt(reader["DbPassword"].ToString());
+                    organisation.DbPassword = decryptedDBPassword;
                     organisation.OrganisationName = reader["OrganisationName"].ToString();
                     organisation.Address = reader["Address"].ToString();
                     organisation.Email = reader["Email"].ToString();
@@ -100,10 +103,12 @@ namespace ITBedrijf.DataAccess
                     organisation.Index = index++;
                     organisation.Id = (int)reader["ID"];
                     organisation.Login = reader["Login"].ToString();
-                    organisation.Password = reader["Password"].ToString();
+                    string decryptedPassword = Cryptography.Decrypt(reader["Password"].ToString());
+                    organisation.Password = decryptedPassword;
                     organisation.DbName = reader["DbName"].ToString();
                     organisation.DbLogin = reader["DbLogin"].ToString();
-                    organisation.DbPassword = reader["DbPassword"].ToString();
+                    string decryptedDBPassword = Cryptography.Decrypt(reader["DbPassword"].ToString());
+                    organisation.DbPassword = decryptedDBPassword;
                     organisation.OrganisationName = reader["OrganisationName"].ToString();
                     organisation.Address = reader["Address"].ToString();
                     organisation.Email = reader["Email"].ToString();
@@ -157,10 +162,12 @@ namespace ITBedrijf.DataAccess
             {
                 string sql = "INSERT INTO Organisations VALUES(@Login,@Password,@DbName,@DbLogin,@DbPassword,@OrganisationName,@Address,@Email,@Phone)";
                 DbParameter par1 = Database.AddParameter("AdminDB", "@Login", organisation.Login);
-                DbParameter par2 = Database.AddParameter("AdminDB", "@Password", organisation.Password);
+                string encryptedPassword = Cryptography.Encrypt(organisation.Password);
+                DbParameter par2 = Database.AddParameter("AdminDB", "@Password", encryptedPassword);
                 DbParameter par3 = Database.AddParameter("AdminDB", "@DbName", organisation.DbName);
                 DbParameter par4 = Database.AddParameter("AdminDB", "@DbLogin", organisation.DbLogin);
-                DbParameter par5 = Database.AddParameter("AdminDB", "@DbPassword", organisation.DbPassword);
+                string encryptedDBPassword = Cryptography.Encrypt(organisation.DbPassword);
+                DbParameter par5 = Database.AddParameter("AdminDB", "@DbPassword", encryptedDBPassword);
                 DbParameter par6 = Database.AddParameter("AdminDB", "@OrganisationName", organisation.OrganisationName);
                 DbParameter par7 = Database.AddParameter("AdminDB", "@Address", organisation.Address);
                 DbParameter par8 = Database.AddParameter("AdminDB", "@Email", organisation.Email);
@@ -184,10 +191,12 @@ namespace ITBedrijf.DataAccess
                 {
                     organisation.Id = (int)reader["ID"];
                     organisation.Login = reader["Login"].ToString();
-                    organisation.Password = reader["Password"].ToString();
+                    string decryptedPassword = Cryptography.Decrypt(reader["Password"].ToString());
+                    organisation.Password = decryptedPassword;
                     organisation.DbName = reader["DbName"].ToString();
                     organisation.DbLogin = reader["DbLogin"].ToString();
-                    organisation.DbPassword = reader["DbPassword"].ToString();
+                    string decryptedDBPassword = Cryptography.Decrypt(reader["DbPassword"].ToString());
+                    organisation.DbPassword = decryptedDBPassword;
                     organisation.OrganisationName = reader["OrganisationName"].ToString();
                     organisation.Address = reader["Address"].ToString();
                     organisation.Email = reader["Email"].ToString();
@@ -203,10 +212,12 @@ namespace ITBedrijf.DataAccess
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbParameter par2 = Database.AddParameter("AdminDB", "@OrganisationName", organisation.OrganisationName);
             DbParameter par3 = Database.AddParameter("AdminDB", "@Login", organisation.Login);
-            DbParameter par4 = Database.AddParameter("AdminDB", "@Password", organisation.Password);
+            string encryptedPassword = Cryptography.Encrypt(organisation.Password);
+            DbParameter par4 = Database.AddParameter("AdminDB", "@Password", encryptedPassword);
             DbParameter par5 = Database.AddParameter("AdminDB", "@DbName", organisation.DbName);
             DbParameter par6 = Database.AddParameter("AdminDB", "@DbLogin", organisation.DbLogin);
-            DbParameter par7 = Database.AddParameter("AdminDB", "@DbPassword", organisation.DbPassword);
+            string encryptedDBPassword = Cryptography.Encrypt(organisation.DbPassword);
+            DbParameter par7 = Database.AddParameter("AdminDB", "@DbPassword", encryptedDBPassword);
             DbParameter par8 = Database.AddParameter("AdminDB", "@Address", organisation.Address);
             DbParameter par9 = Database.AddParameter("AdminDB", "@Email", organisation.Email);
             DbParameter par10 = Database.AddParameter("AdminDB", "@Phone", organisation.Phone);

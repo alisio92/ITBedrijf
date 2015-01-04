@@ -23,7 +23,15 @@
 <p>
     @foreach (var item in @ViewBag.Numbers)
     {
-        <a href="/Kassa/Logs?Offset=@item">@item -</a>
+        if (@item != @ViewBag.Length-1)
+        {
+            <a href="/Kassa/Logs?Offset=@item">@item</a>
+        <span> - </span>
+        }
+        else
+        {
+            <a href="/Kassa/Logs?Offset=@item">@item</a>
+        }
     }
 </p>
 <script>

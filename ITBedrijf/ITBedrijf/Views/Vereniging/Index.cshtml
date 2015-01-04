@@ -32,7 +32,15 @@
 <p>
     @foreach (var item in @ViewBag.Numbers)
     {
-        <a href="/Vereniging/Index?Offset=@item">@item -</a>
+        if (@item != @ViewBag.Length - 1)
+        {
+            <a href="/Vereniging/Index?Offset=@item">@item</a>
+            <span> - </span>
+        }
+        else
+        {
+            <a href="/Vereniging/Index?Offset=@item">@item</a>
+        }
     }
 </p>
 <script>

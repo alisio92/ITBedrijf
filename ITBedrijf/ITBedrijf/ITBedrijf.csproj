@@ -178,6 +178,7 @@
     <Compile Include="DataAccess\DAOrganisationregister.cs" />
     <Compile Include="DataAccess\DARegister.cs" />
     <Compile Include="DataAccess\Database.cs" />
+    <Compile Include="Extra\Cryptography.cs" />
     <Compile Include="Extra\LimitList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

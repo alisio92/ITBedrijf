@@ -29,6 +29,14 @@
 <p>
     @foreach (var item in @ViewBag.Numbers)
     {
-        <a href="/Vereniging/Register?id=@ViewBag.Organisation.Id&Offset=@item">@item -</a>
+        if (@item != @ViewBag.Length - 1)
+        {
+            <a href="/Vereniging/Register?id=@ViewBag.Organisation.Id&Offset=@item">@item</a>
+            <span> - </span>
+        }
+        else
+        {
+            <a href="/Vereniging/Register?id=@ViewBag.Organisation.Id&Offset=@item">@item</a>
+        }
     }
 </p>
