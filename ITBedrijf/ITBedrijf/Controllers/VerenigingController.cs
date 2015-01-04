@@ -103,7 +103,7 @@ namespace ITBedrijf.Controllers
         {
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             if (!offset.HasValue) offset = 0;
-            if (!aantal.HasValue) aantal = 1;
+            if (!aantal.HasValue) aantal = 10;
             List<OrganisationRegister> register = DAOrganisationRegister.GetOrganisationRegisterById(id, offset.Value, aantal.Value);
             List<int> numbers = LimitList.GetNumberList(LimitList.GetAantal(DAOrganisationRegister.GetOrganisationRegisterCount(id), aantal.Value));
             ViewBag.Register = register;
@@ -128,6 +128,7 @@ namespace ITBedrijf.Controllers
         [HttpPost]
         public ActionResult NewRegister(int organisationID, int registerID, PMOrganisationRegister organisationRegister, DateTime? FromTime, DateTime? UntilTime)
         {
+            
             if (User.Identity.Name == "") return RedirectToAction("ErrorLogin", "Home");
             organisationRegister.OrganisationID = organisationID;
             if (ModelState.IsValid)
